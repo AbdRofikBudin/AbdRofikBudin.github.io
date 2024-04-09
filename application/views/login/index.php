@@ -20,7 +20,7 @@
 
 <body>
     <div class="container d-flex mt-4 brand-info">
-        <img src="<?= base_url('assets/img/morowali.png') ?>" alt="morowali logo" style="width: 30pt;">
+        <img src="<?= base_url('assets/img/morowali.png') ?>" alt="morowali logo" width="40" height="50">
         <p class="fw-normal ms-2">
             <span class="fw-semibold">Pelayanan Online</span>
             <br>
