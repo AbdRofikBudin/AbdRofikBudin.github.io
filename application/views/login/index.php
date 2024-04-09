@@ -77,8 +77,11 @@
                                 <?= $captcha ?>
                             </div>
                         </div>
-
+                        <div class="container d-flex justify-content-center gap-2">
                         <button type="submit" class="btn btn-primary text-center mt-3">Login</button>
+                        <a href="<?=site_url('Register')?>" class="btn btn-primary text-center mt-3">Daftar</a>
+                        </div>
+                       
                     </form>
                 </div>
                 <div class="col text-center my-auto">

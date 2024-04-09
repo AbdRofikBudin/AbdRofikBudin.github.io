@@ -64,7 +64,7 @@
                             </div>
                         <?php endif ?>
                     </div>
-                    <form action="<?= site_url('Register/registerUser') ?>" method="post">
+                    <form action="<?= site_url('Register/registerUser') ?>" method="post" class="mb-3">
                         <div class="row mb-3">
 
                             <label for="inputEmail3" class="col-sm-2 col-form-label text-start">NIK</label>
@@ -126,6 +126,7 @@
 
                         <button type="submit" class="btn btn-primary text-center mt-3">Buat Akun</button>
                     </form>
+                    <P>Sudah Punya Akun ? <a href="<?=site_url('Login')?>" class="mt-5">Login</a></P>
                 </div>
                 <div class="col">
 

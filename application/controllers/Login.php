@@ -48,7 +48,8 @@ class Login extends CI_Controller
                         "id" => $check_credential['id'],
                         "username" => $check_credential['username'],
                         "email" => $check_credential['email'],
-                        "nama" => $check_credential['applicant_name']
+                        "nama" => $check_credential['applicant_name'],
+                        "is_logged" => true
                     ];
 
                     $this->session->set_userdata($session_data);
@@ -67,5 +68,10 @@ class Login extends CI_Controller
                 }
             }
         }
+    }
+
+    public function signout() {
+        session_destroy();
+        redirect('Home');
     }
 }
