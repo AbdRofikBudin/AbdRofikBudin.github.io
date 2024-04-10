@@ -44,7 +44,7 @@
             </a>
             <p class="text-center d-none d-lg-block" style="margin-left: -120px;">Jl. Raya Medina No. 5, Lafeu, Bungku Pesisir, <br>
                 Morowali, Sulawesi Tengah 12731</p>
-            <a class="btn btn-outline-secondary" href="<?= site_url('Login') ?>">Masuk</a>
+            <a class="btn btn-outline-secondary" href="<?= ($this->session->userdata('is_logged')) ? site_url('Dashboard/user') : site_url('Login') ?>"><?= ($this->session->userdata('is_logged')) ? "Dashboard": "Masuk" ?></a>
         </div>
     </nav>
 

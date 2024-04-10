@@ -89,7 +89,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="<?= base_url('assets/admin_template/') ?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    <img class="rounded-circle" width="32" alt="Image placeholder" src="https://ui-avatars.com/api/?name=<?= $this->session->userdata('username') ?>&background=random&color=fff">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block"><?= $this->session->userdata('username') ?></a>
@@ -106,7 +106,7 @@
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>
                                     Home
-                                    <span class="right badge badge-danger">New</span>
+                                    <!-- <span class="right badge badge-danger">New</span> -->
                                 </p>
                             </a>
                         </li>

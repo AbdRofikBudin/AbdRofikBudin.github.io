@@ -10,8 +10,8 @@ function createCaptcha()
             'font_path'     => 'system/fonts/texb.ttf',
             'img_width'     => '160',
             'img_height'    => 40,
-            'word_length'   => 8,
-            'font_size'     => 18,
+            'word_length'   => 5,
+            'font_size'     => 20,
             'expiration' => 900
         );
 
