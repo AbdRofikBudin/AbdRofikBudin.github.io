@@ -44,7 +44,7 @@
             </a>
             <p class="text-center d-none d-lg-block" style="margin-left: -120px;">Jl. Raya Medina No. 5, Lafeu, Bungku Pesisir, <br>
                 Morowali, Sulawesi Tengah 12731</p>
-            <a class="btn btn-outline-secondary" href="<?= ($this->session->userdata('is_logged')) ? site_url('Dashboard/user') : site_url('Login') ?>"><?= ($this->session->userdata('is_logged')) ? "Dashboard": "Masuk" ?></a>
+            <a class="btn btn-outline-secondary" href="<?= ($this->session->userdata('is_logged')) ? site_url('Dashboard/user') : site_url('Login') ?>"><?= ($this->session->userdata('is_logged')) ? $this->session->userdata('username'): "Masuk" ?></a>
         </div>
     </nav>
 
@@ -120,47 +120,53 @@
             <h2 class="fw-bold fs-3 mt-5">LAYANAN</h2>
             <div class="row mt-5 justify-content-center">
                 <div class="col-lg-3 mb-5">
-                    <a href="#" class="text-decoration-none">
+                    <a href="<?=site_url('Home/layanan_surat/kematian')?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Keterangan Kematian</h5>
                     </a>
                 </div>
                 <div class="col-lg-3 mb-5">
-                    <a href="#" class="text-decoration-none">
+                    <a href="<?=site_url('Home/layanan_surat/kelahiran')?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Keterangan Lahir</h5>
                     </a>
 
                 </div>
                 <div class="col-lg-3 mb-5">
-                    <a href="#" class="text-decoration-none">
+                    <a href="<?=site_url('Home/layanan_surat/kepindahan')?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Pindah Kependudukan</h5>
                     </a>
                 </div>
                 <div class="col-lg-3 mb-5">
-                    <a href="#" class="text-decoration-none">
+                    <a href="<?=site_url('Home/layanan_surat/kedatangan')?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Keterangan Datang</h5>
                     </a>
                 </div>
                 <div class="col-lg-3">
-                    <a href="#" class="text-decoration-none">
+                    <a href="<?=site_url('Home/layanan_surat/usaha')?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Keterangan Usaha</h5>
                     </a>
                 </div>
                 <div class="col-lg-3">
-                    <a href="#" class="text-decoration-none">
+                    <a href="<?=site_url('Home/layanan_surat/kurang-mampu')?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Keterangan Kurang
                             Mampu</h5>
                     </a>
                 </div>
                 <div class="col-lg-3">
-                    <a href="#" class="text-decoration-none">
+                    <a href="<?=site_url('Home/layanan_surat/pengantar-nikah')?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Pengantar Nikah</h5>
+                    </a>
+                </div>
+                <div class="col-lg-3">
+                    <a href="<?=site_url('Home/layanan_surat/izin-kegiatan')?>" class="text-decoration-none">
+                        <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
+                        <h5 class="text-black mt-4">Surat Izin Berkegiatan</h5>
                     </a>
                 </div>
             </div>

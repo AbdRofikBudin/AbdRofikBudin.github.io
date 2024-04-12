@@ -6,7 +6,7 @@ function createCaptcha()
         // CAPTCHA configuration
         $config = array(
             'img_path'      => 'assets/captcha_images/',
-            'img_url'       => base_url('assets/') . 'captcha_images/',
+            'img_url'       => base_url().'assets/captcha_images/',
             'font_path'     => FCPATH.'assets/font/texb.ttf',
             'img_width'     => '160',
             'img_height'    => 40,
