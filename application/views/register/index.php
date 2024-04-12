@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?=$title?></title>
+    <title><?= $title ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,6 +58,9 @@
                                 <?= (form_error('email')) != "" ? "<br>" . form_error('email') . "." :  "" ?>
                                 <?= (form_error('nama')) != "" ? "<br>" . form_error('nama') . "." :  "" ?>
                                 <?= (form_error('username')) != "" ? "<br>" . form_error('username') . "." :  "" ?>
+                                <?= (form_error('tempat-lahir')) != "" ? "<br>" . form_error('tempat-lahir') . "." :  "" ?>
+                                <?= (form_error('tanggal-lahir')) != "" ? "<br>" . form_error('tanggal-lahir') . "." :  "" ?>
+                                <?= (form_error('alamat')) != "" ? "<br>" . form_error('alamat') . "." :  "" ?>
                                 <?= (form_error('password')) != "" ? "<br>" . form_error('password') . "." :  "" ?>
                                 <?= (form_error('captcha')) != "" ? "<br>" . form_error('captcha') . "." :  "" ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -85,6 +88,37 @@
                                     <option value="1">Pria</option>
                                     <option value="0">Wanita</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label text-start">Tempat Lahir</label>
+                            <div class="col-sm-10">
+                                <input name="tempat-lahir" class="form-control" id="inputEmail3" value="<?= set_value('tempat-lahir') ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label text-start">Tanggal Lahir</label>
+                            <div class="col-sm-10">
+                                <input type="date" name="tanggal-lahir" class="form-control" id="inputEmail3" value="<?= set_value('tanggal-lahir') ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label text-start">Agama </label>
+                            <div class="col-sm-10">
+                                <select class="form-select" aria-label="Default select example" name="agama">
+                                    <option value="islam">Islam</option>
+                                    <option value="katolik">Katolik</option>
+                                    <option value="kristen">Kristen</option>
+                                    <option value="hindu">Hindu</option>
+                                    <option value="buddha">Buddha</option>
+                                    <option value="konghucu">Konghucu</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label text-start">Alamat</label>
+                            <div class="col-sm-10">
+                                <input name="alamat" class="form-control" id="inputEmail3" value="<?= set_value('alamat') ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -126,7 +160,7 @@
 
                         <button type="submit" class="btn btn-primary text-center mt-3">Buat Akun</button>
                     </form>
-                    <P>Sudah Punya Akun ? <a href="<?=site_url('Login')?>" class="mt-5">Login</a></P>
+                    <P>Sudah Punya Akun ? <a href="<?= site_url('Login') ?>" class="mt-5">Login</a></P>
                 </div>
                 <div class="col">
 

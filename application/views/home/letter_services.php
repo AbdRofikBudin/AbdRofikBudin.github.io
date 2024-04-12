@@ -109,13 +109,13 @@
                     <div class="col-lg-6">
                         <div class="mb-5">
                             <label for="exampleInputEmail1" class="form-label">Tempat Lahir Pelapor</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tempat-lahir" disabled>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tempat-lahir" value="<?= ucfirst($user_identity['place_of_birth'])  ?>" disabled>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-5">
                             <label for="exampleInputEmail1" class="form-label">Tanggal Lahir Pelapor</label>
-                            <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tanggal-lahir" disabled>
+                            <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tanggal-lahir" value="<?= $user_identity['date_of_birth'] ?>" disabled>
                         </div>
                     </div>
 
@@ -123,19 +123,19 @@
                         <div class="col-lg-6">
                             <div class="mb-5">
                                 <label for="exampleInputEmail1" class="form-label">Alamat Pemohon *</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="alamat" disabled>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="alamat" value="<?= ucfirst($user_identity['address'])  ?>" disabled>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-5">
                                 <label for="exampleInputEmail1" class="form-label">Pekerjaan Pemohon *</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pekerjaan-pemohon" required>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pekerjaan-pemohon"  required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-5">
                                 <label for="exampleInputEmail1" class="form-label">Agama *</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="agama" disabled>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="agama" value="<?= ucfirst($user_identity['religion']) ?>" disabled>
                             </div>
                         </div>
                     <?php endif ?>

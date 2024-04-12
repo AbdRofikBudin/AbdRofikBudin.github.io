@@ -36,7 +36,7 @@ class Register extends CI_Controller
         $body = $this->load->view('email/emailVerifikasi', $data, true);
 
 
-        $this->email->subject('Email Test');
+        $this->email->subject('Verifikasi User');
         $this->email->message($body);
 
         if ($this->email->send()) {
@@ -65,6 +65,10 @@ class Register extends CI_Controller
         $email = $this->input->post('email', true);
         $username = $this->input->post('username', true);
         $password = $this->input->post('password', true);
+        $place_birth = $this->input->post('tempat-lahir', true);
+        $date_birth = $this->input->post('tanggal-lahir', true);
+        $religion = $this->input->post('agama', true);
+        $address = $this->input->post('alamat', true);
 
 
         $this->form_validation->set_rules('nik', 'nik', 'required|min_length[16]|max_length[16]', [
@@ -85,6 +89,18 @@ class Register extends CI_Controller
 
         $this->form_validation->set_rules('nama', 'nama', 'required', [
             'required' => "Field Nama Lengkap Wajib Diisi"
+        ]);
+
+        $this->form_validation->set_rules('tempat-lahir', 'tempat-lahir', 'required', [
+            'required' => "Tempat Lahir Wajib Diisi"
+        ]);
+
+        $this->form_validation->set_rules('tanggal-lahir', 'tanggal-lahir', 'required', [
+            'required' => "Tanggal Lahir Wajib Diisi"
+        ]);
+
+        $this->form_validation->set_rules('alamat', 'alamat', 'required', [
+            'required' => "Alamat Wajib Diisi"
         ]);
 
         $this->form_validation->set_rules('password', 'password', 'required|matches[confirm-password]', [
@@ -123,6 +139,10 @@ class Register extends CI_Controller
                 "nik" => $nik,
                 "email" => $email,
                 "gender" => $gender,
+                "place_of_birth" => $place_birth,
+                "date_of_birth" => $date_birth,
+                "religion" => $religion,
+                "address" => $address,
                 "username" => $username,
                 "password" => password_hash($password, PASSWORD_DEFAULT),
                 "verif_status" => 0
