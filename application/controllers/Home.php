@@ -52,8 +52,8 @@ class Home extends CI_Controller
                 $component_url = 'home/components/surat_form/usaha';
                 break;
             case "kepindahan":
-                $title = "Home | Surat Keterangan Kepindahan";
-                $type = "Surat Keterangan Kepindahan";
+                $title = "Home | Surat Keterangan Perpindahan";
+                $type = "Surat Keterangan Perpindahan";
                 $component_url = 'home/components/surat_form/kepindahan';
                 break;
             case "kedatangan":

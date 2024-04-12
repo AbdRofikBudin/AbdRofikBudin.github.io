@@ -70,7 +70,7 @@
             <div class="alert alert-warning alert-dismissible fade show p-4" role="alert">
                 <div class="container border-bottom border-black p-0">
                     <h3 class="fw-semibold">Informasi</h3>
-                    <p>Persyaratan permohonan Surat Keterangan Kematian</p>
+                    <p>Persyaratan permohonan <?= ucfirst($service) ?></p>
                 </div>
                 <div class="container p-0 mt-4">
                     <h5>Catatan : </h5>
@@ -118,10 +118,31 @@
                             <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tanggal-lahir" disabled>
                         </div>
                     </div>
+
+                    <?php if ($this->uri->segment(3) == "kurang-mampu" || $this->uri->segment(3) == "pengantar-nikah") : ?>
+                        <div class="col-lg-6">
+                            <div class="mb-5">
+                                <label for="exampleInputEmail1" class="form-label">Alamat Pemohon *</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="alamat" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-5">
+                                <label for="exampleInputEmail1" class="form-label">Pekerjaan Pemohon *</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pekerjaan-pemohon" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-5">
+                                <label for="exampleInputEmail1" class="form-label">Agama *</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="agama" disabled>
+                            </div>
+                        </div>
+                    <?php endif ?>
                 </div>
             </div>
-            <?=$contents?>
-            <div class="container d-flex justify-content-end gap-2">
+            <?= $contents ?>
+            <div class="container d-flex justify-content-end gap-2 mb-5">
                 <button type="reset" class="btn btn-danger">Reset</button>
                 <button type="submit" class="btn btn-primary">Kirim Permohonan</button>
             </div>
