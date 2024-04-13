@@ -31,7 +31,14 @@
 </head>
 
 <body>
-
+    <?php if ($this->session->flashdata('flash')) : ?>
+        <div class="flash-success" data-flash="<?= $this->session->flashdata('flash'); ?>"></div>
+        <?php unset($_SESSION['flash']); ?>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('flash-gagal')) : ?>
+        <div class="flash-fail" data-flash="<?= $this->session->flashdata('flash-gagal'); ?>"></div>
+        <?php unset($_SESSION['flash-gagal']); ?>
+    <?php endif; ?>
     <nav class="navbar bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand d-flex" href="<?= site_url('Home') ?>">
@@ -44,7 +51,7 @@
             </a>
             <p class="text-center d-none d-lg-block" style="margin-left: -120px;">Jl. Raya Medina No. 5, Lafeu, Bungku Pesisir, <br>
                 Morowali, Sulawesi Tengah 12731</p>
-            <a class="btn btn-outline-secondary" href="<?= ($this->session->userdata('is_logged')) ? site_url('Dashboard/user') : site_url('Login') ?>"><?= ($this->session->userdata('is_logged')) ? $this->session->userdata('username'): "Masuk" ?></a>
+            <a class="btn btn-outline-secondary" href="<?= ($this->session->userdata('is_logged')) ? site_url('Dashboard/user') : site_url('Login') ?>"><?= ($this->session->userdata('is_logged')) ? $this->session->userdata('username') : "Masuk" ?></a>
         </div>
     </nav>
 
@@ -120,51 +127,51 @@
             <h2 class="fw-bold fs-3 mt-5">LAYANAN</h2>
             <div class="row mt-5 justify-content-center">
                 <div class="col-lg-3 mb-5">
-                    <a href="<?=site_url('Home/layanan_surat/kematian')?>" class="text-decoration-none">
+                    <a href="<?= site_url('Home/layanan_surat/kematian') ?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Keterangan Kematian</h5>
                     </a>
                 </div>
                 <div class="col-lg-3 mb-5">
-                    <a href="<?=site_url('Home/layanan_surat/kelahiran')?>" class="text-decoration-none">
+                    <a href="<?= site_url('Home/layanan_surat/kelahiran') ?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Keterangan Lahir</h5>
                     </a>
 
                 </div>
                 <div class="col-lg-3 mb-5">
-                    <a href="<?=site_url('Home/layanan_surat/kepindahan')?>" class="text-decoration-none">
+                    <a href="<?= site_url('Home/layanan_surat/kepindahan') ?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Pindah Kependudukan</h5>
                     </a>
                 </div>
                 <div class="col-lg-3 mb-5">
-                    <a href="<?=site_url('Home/layanan_surat/kedatangan')?>" class="text-decoration-none">
+                    <a href="<?= site_url('Home/layanan_surat/kedatangan') ?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Keterangan Datang</h5>
                     </a>
                 </div>
                 <div class="col-lg-3">
-                    <a href="<?=site_url('Home/layanan_surat/usaha')?>" class="text-decoration-none">
+                    <a href="<?= site_url('Home/layanan_surat/usaha') ?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Keterangan Usaha</h5>
                     </a>
                 </div>
                 <div class="col-lg-3">
-                    <a href="<?=site_url('Home/layanan_surat/kurang-mampu')?>" class="text-decoration-none">
+                    <a href="<?= site_url('Home/layanan_surat/kurang-mampu') ?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Keterangan Kurang
                             Mampu</h5>
                     </a>
                 </div>
                 <div class="col-lg-3">
-                    <a href="<?=site_url('Home/layanan_surat/pengantar-nikah')?>" class="text-decoration-none">
+                    <a href="<?= site_url('Home/layanan_surat/pengantar-nikah') ?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Pengantar Nikah</h5>
                     </a>
                 </div>
                 <div class="col-lg-3">
-                    <a href="<?=site_url('Home/layanan_surat/izin-kegiatan')?>" class="text-decoration-none">
+                    <a href="<?= site_url('Home/layanan_surat/izin-kegiatan') ?>" class="text-decoration-none">
                         <div class="img-placeholder container shadow bg-success rounded-circle" style="width: 175px; height: 175px;"></div>
                         <h5 class="text-black mt-4">Surat Izin Berkegiatan</h5>
                     </a>
@@ -180,6 +187,31 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+       
+        var successAlert = $('.flash-success').data('flash');
+
+        if (successAlert) {
+            Swal.fire({
+                title: "Yeayy!",
+                text: "Pengajuan Surat Berhasil Dilakukan, Cek Progress Pada Dashboard Anda",
+                icon: "success"
+            });
+        }
+
+        var failAlert = $('.flash-fail').data('flash');
+       
+        if (failAlert) {
+            Swal.fire({
+                title: "Maaf!",
+                text: "Saat ini masih ada surat yang sedang diproses tunggu hingga selesai yah!",
+                icon: "warning"
+            });
+        }
+    </script>
 </body>
 
 </html>

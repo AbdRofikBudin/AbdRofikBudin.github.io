@@ -24,4 +24,22 @@ class Mcrud extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->delete($table);
     }
+
+    public function generate_id($table) {
+        // Count all records in the table
+        $count = $this->db->count_all($table);
+
+        // Increment the count by 1 to get the next sequence number
+        // $sequence = str_pad($count + 1, 4, '0', STR_PAD_LEFT);
+        $sequence = $count + 1;
+
+        // Generate the custom ID format: Prefix-Year-Month-Sequence
+        // $prefix = $identity; // Replace with your desired prefix
+        // $year = date('y');
+        // $month = date('m');
+        // $customId = $prefix . "-" . $year . $month . $sequence;
+        $customId = $sequence;
+
+        return $customId;
+    }
 }

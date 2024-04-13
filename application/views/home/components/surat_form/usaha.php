@@ -35,13 +35,13 @@
         <div class="col-lg-6">
             <div class="mb-5">
                 <label for="exampleInputEmail1" class="form-label">Scan KTP Pemilik Usaha *</label>
-                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="ktp" required>
+                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="ktp" required accept="application/pdf, image/*">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="mb-5">
                 <label for="exampleInputEmail1" class="form-label">Scan Dokumen Usaha *</label>
-                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="dokumen-usaha" required>
+                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="dokumen-usaha" required accept="application/pdf, image/*">
             </div>
         </div>
         

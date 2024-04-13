@@ -10,7 +10,7 @@
         <div class="col-lg-6">
             <div class="mb-5">
                 <label for="exampleInputEmail1" class="form-label">Alamat Tujuan Kedatangan *</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="alamat-datang" required>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="alamat-tujuan" required>
             </div>
         </div>
         <div class="col-lg-6">
@@ -30,19 +30,19 @@
         <div class="col-lg-6">
             <div class="mb-5">
                 <label for="exampleInputEmail1" class="form-label">Scan Surat Keterangan Pindah *</label>
-                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="surat-pindah" required>
+                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="surat-pindah" required accept="application/pdf, image/*">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="mb-5">
                 <label for="exampleInputEmail1" class="form-label">Scan KK *</label>
-                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="kk" required>
+                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="kk" required accept="application/pdf, image/*">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="mb-5">
                 <label for="exampleInputEmail1" class="form-label">Scan KTP *</label>
-                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="ktp" required>
+                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="ktp" required accept="application/pdf, image/*">
             </div>
         </div>
 </div>

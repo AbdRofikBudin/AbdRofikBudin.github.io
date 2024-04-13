@@ -64,6 +64,22 @@
 
         </div>
     </section>
+    <div class="container mt-5">
+        <?php if ($this->session->flashdata('flash')) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Yeayy!</strong> <?=$this->session->flashdata('flash')?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php $this->session->unset_userdata('flash')?>
+        <?php endif ?>
+        <?php if ($this->session->flashdata('flash-gagal')) : ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Maaf!</strong> <?=$this->session->flashdata('flash-gagal')?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php $this->session->unset_userdata('flash-gagal')?>
+        <?php endif ?>
+    </div>
 
     <section id="information" class="mt-5">
         <div class="container">
@@ -90,7 +106,7 @@
     </section>
 
     <section id="form" class="mt-5">
-        <form action="<?= site_url('Home/letter_request_action') ?>" method="post">
+        <form action="<?= site_url('Home/letter_request_action/' . $this->uri->segment(3)) ?>" method="post" enctype="multipart/form-data">
             <div class="container">
                 <h3 class="fw-semibold">Data Pelapor</h3>
                 <div class="row mt-4">
@@ -109,13 +125,13 @@
                     <div class="col-lg-6">
                         <div class="mb-5">
                             <label for="exampleInputEmail1" class="form-label">Tempat Lahir Pelapor</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tempat-lahir" value="<?= ucfirst($user_identity['place_of_birth'])  ?>" disabled>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tempat" value="<?= ucfirst($user_identity['place_of_birth'])  ?>" disabled>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-5">
                             <label for="exampleInputEmail1" class="form-label">Tanggal Lahir Pelapor</label>
-                            <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tanggal-lahir" value="<?= $user_identity['date_of_birth'] ?>" disabled>
+                            <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tanggal" value="<?= $user_identity['date_of_birth'] ?>" disabled>
                         </div>
                     </div>
 
@@ -123,13 +139,13 @@
                         <div class="col-lg-6">
                             <div class="mb-5">
                                 <label for="exampleInputEmail1" class="form-label">Alamat Pemohon *</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="alamat" value="<?= ucfirst($user_identity['address'])  ?>" disabled>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="alamat-person" value="<?= ucfirst($user_identity['address'])  ?>" disabled>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-5">
                                 <label for="exampleInputEmail1" class="form-label">Pekerjaan Pemohon *</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pekerjaan-pemohon"  required>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pekerjaan-pemohon" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -156,6 +172,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
 </body>
 
 </html>
