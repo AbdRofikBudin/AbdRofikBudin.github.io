@@ -22,7 +22,7 @@
         <div class="col-lg-6">
             <div class="mb-5">
                 <label for="exampleInputEmail1" class="form-label">Tanggal Pelaksanaan *</label>
-                <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tanggal-kegiatan" required>
+                <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tanggal" required>
             </div>
         </div>
         <div class="col-lg-6">
@@ -30,11 +30,11 @@
                 <label for="exampleInputEmail1" class="form-label">Waktu Pelaksanaan Kegiatan *</label>
                 <div class="row align-items-center">
                     <div class="col-lg-3">
-                        <input type="time" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="waktu-mulai-kegiatan" required>
+                        <input type="time" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="waktu-mulai" required>
                     </div>
                     <div class="col-auto fw-bold">-</div>
                     <div class="col-lg-3">
-                        <input type="time" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="waktu-akhir-kegiatan" required>
+                        <input type="time" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="waktu-selesai" required>
                     </div>
                 </div>
 

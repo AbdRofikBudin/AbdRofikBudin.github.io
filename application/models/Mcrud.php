@@ -1,7 +1,7 @@
 <?php
 
 class Mcrud extends CI_Model {
-    public function get_items($id = FALSE, $table, $idIdentity) {
+    public function get_items($id = FALSE, $table, $idIdentity = "") {
         if ($id === FALSE) {
             $query = $this->db->get($table);
             return $query->result();
@@ -9,6 +9,12 @@ class Mcrud extends CI_Model {
 
         $query = $this->db->get_where($table, array($idIdentity => $id));
         return $query->row_array();
+        
+    }
+
+    public function get_spesific_items($table, $idIdentity, $id) {
+        $query = $this->db->get_where($table, array($idIdentity => $id));
+        return $query->result();
     }
 
     public function create_item($data, $table) {

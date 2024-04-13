@@ -10,7 +10,7 @@
         <div class="col-lg-6">
             <div class="mb-5">
                 <label for="exampleInputEmail1" class="form-label">Alamat Usaha *</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="alamat-usahas" required>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="alamat-usaha" required>
             </div>
         </div>
         <div class="col-lg-6">
@@ -22,7 +22,7 @@
         <div class="col-lg-6">
             <div class="mb-5">
                 <label for="exampleInputEmail1" class="form-label">Nama Pemilik Usaha *</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama-pemilik-usaha" required>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pemilik-usaha" required>
             </div>
         </div>
     </div>

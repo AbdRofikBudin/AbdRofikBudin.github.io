@@ -4,12 +4,12 @@
         <div class="col-lg-6">
             <div class="mb-4">
                 <label for="exampleInputEmail1" class="form-label">Tujuan Pengajuan Surat *</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="tujuan-surat" required>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="deskripsi" required>
             </div>
         </div>
         <div class="container mb-5">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"  required>
+                <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" required>
                 <label class="form-check-label" for="flexCheckDefault">
                     Dengan ini saya menyatakan sebenar-benarnya sesuai kondisi nyata dan diperuntukkan sesuai kegunaannya
                 </label>

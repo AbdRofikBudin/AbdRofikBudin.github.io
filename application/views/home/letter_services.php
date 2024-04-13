@@ -145,7 +145,7 @@
                         <div class="col-lg-6">
                             <div class="mb-5">
                                 <label for="exampleInputEmail1" class="form-label">Pekerjaan Pemohon *</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pekerjaan-pemohon" required>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pekerjaan" required>
                             </div>
                         </div>
                         <div class="col-lg-6">

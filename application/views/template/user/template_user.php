@@ -26,6 +26,10 @@
     <link rel="stylesheet" href="<?= base_url('assets/admin_template/') ?>plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="<?= base_url('assets/admin_template/') ?>plugins/summernote/summernote-bs4.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<?= base_url('assets/admin_template/') ?>plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets/admin_template/') ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets/admin_template/') ?>plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -89,10 +93,10 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                    <img class="rounded-circle" width="32" alt="Image placeholder" src="https://ui-avatars.com/api/?name=<?= $this->session->userdata('username') ?>&background=random&color=fff">
+                        <img class="rounded-circle" width="32" alt="Image placeholder" src="https://ui-avatars.com/api/?name=<?= $this->session->userdata('username') ?>&background=random&color=fff">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?= $this->session->userdata('username') ?></a>
+                        <a href="<?=site_url('Dashboard/user')?>" class="d-block"><?= $this->session->userdata('username') ?></a>
                     </div>
                 </div>
 
@@ -102,7 +106,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="<?=site_url('Home')?>" class="nav-link">
+                            <a href="<?= site_url('Dashboard/user') ?>" class="nav-link">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>
                                     Home
@@ -112,7 +116,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
+                            <a href="<?= site_url('Dashboard/letter_history') ?>" class="nav-link">
                                 <i class="nav-icon fas fa-history"></i>
                                 <p>
                                     Riwayat Pengajuan Surat
@@ -120,7 +124,7 @@
                             </a>
                         </li>
 
-                     
+
 
                         <li class="nav-item">
                             <a href="<?= site_url('Login/signout') ?>" class="nav-link">
@@ -187,9 +191,37 @@
     <script src="<?= base_url('assets/admin_template/') ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?= base_url('assets/admin_template/') ?>dist/js/adminlte.js"></script>
-    
+
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?= base_url('assets/admin_template/') ?>dist/js/pages/dashboard.js"></script>
+
+    <!-- DataTables  & Plugins -->
+    <script src="<?= base_url('assets/admin_template/') ?>plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url('assets/admin_template/') ?>plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?= base_url('assets/admin_template/') ?>plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?= base_url('assets/admin_template/') ?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="<?= base_url('assets/admin_template/') ?>plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="<?= base_url('assets/admin_template/') ?>plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="<?= base_url('assets/admin_template/') ?>plugins/jszip/jszip.min.js"></script>
+    <script src="<?= base_url('assets/admin_template/') ?>plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="<?= base_url('assets/admin_template/') ?>plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="<?= base_url('assets/admin_template/') ?>plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="<?= base_url('assets/admin_template/') ?>plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="<?= base_url('assets/admin_template/') ?>plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+    <script>
+        $(function() {
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 </body>
 
 </html>

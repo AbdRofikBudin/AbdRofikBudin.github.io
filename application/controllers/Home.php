@@ -8,7 +8,6 @@ class Home extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Mcrud');
-      
     }
 
     private function checkAuth()
@@ -88,7 +87,8 @@ class Home extends CI_Controller
         $this->template->load('home/letter_services', $component_url, $data);
     }
 
-    public function letter_request_action($letter_type) {
+    public function letter_request_action($letter_type)
+    {
         $this->checkAuth();
         $id = $this->session->userdata('id');
         $config = array(
@@ -106,25 +106,25 @@ class Home extends CI_Controller
                 $this->letter_request_birth($id);
                 break;
             case "kematian":
-               $this->letter_request_died($id);
+                $this->letter_request_died($id);
                 break;
             case "usaha":
-               
+                $this->letter_request_business($id);
                 break;
             case "kepindahan":
-                $this->letter_request_move($id, "perpindahan");
+                $this->letter_request_move($id, "kepindahan");
                 break;
             case "kedatangan":
                 $this->letter_request_move($id, "kedatangan");
                 break;
             case "izin-kegiatan":
-               
+                $this->letter_request_event($id);
                 break;
             case "pengantar-nikah":
-               
+                $this->letter_request_others($id, "pengantar-nikah");
                 break;
             case "kurang-mampu":
-               
+                $this->letter_request_others($id, "kurang-mampu");
                 break;
             default:
                 redirect('Home');
@@ -132,7 +132,8 @@ class Home extends CI_Controller
         }
     }
 
-    private function letter_request_birth($idApplicant) {
+    private function letter_request_birth($idApplicant)
+    {
         $id = $this->Mcrud->generate_id('birth_baby_identities');
         $namaIbu = $this->input->post('nama-ibu', true);
         $nikIbu = $this->input->post('nik-ibu', true);
@@ -146,15 +147,15 @@ class Home extends CI_Controller
         $anakKe = $this->input->post('anak-ke', true);
 
 
-        for($x = 0; $x<2; $x++){
-            if($x == 0) {
+        for ($x = 0; $x < 2; $x++) {
+            if ($x == 0) {
                 if ($this->upload->do_upload('surket-bidan')) {
                     $surketBidan = $this->upload->data('file_name');
                 } else {
                     $this->session->set_flashdata('flash-gagal', $this->upload->display_errors());
                     redirect('Home/layanan_surat/kelahiran');
                 }
-            }else {
+            } else {
                 if ($this->upload->do_upload('kk')) {
                     $kk = $this->upload->data('file_name');
                 } else {
@@ -180,7 +181,7 @@ class Home extends CI_Controller
 
         $this->Mcrud->create_item($dataInsert, "birth_baby_identities");
 
-        if($this->db->affected_rows()){
+        if ($this->db->affected_rows()) {
             $dataInsertLetter = array(
                 "applicant_id" => $idApplicant,
                 "request_type" => "kelahiran",
@@ -193,14 +194,14 @@ class Home extends CI_Controller
             $this->Mcrud->create_item($dataInsertLetter, "letter_requests");
             $this->session->set_flashdata('flash', "Berhasil Menyimpan Data Anak");
             redirect('Home');
-        }else {
+        } else {
             $this->session->set_flashdata('flash-gagal', "Gagal Menyimpan Data Anak");
             redirect('Home/layanan_surat/kelahiran');
         }
-
     }
-    
-    private function letter_request_died($idApplicant) {
+
+    private function letter_request_died($idApplicant)
+    {
         $id = $this->Mcrud->generate_id('died_person_identities');
         $nik = $this->input->post('nik-jenazah', true);
         $nama = $this->input->post('nama-jenazah', true);
@@ -214,20 +215,20 @@ class Home extends CI_Controller
         $penyebabMeninggal = $this->input->post('penyebab-meninggal', true);
 
 
-        for($x = 0; $x<2; $x++){
-            if($x == 0) {
+        for ($x = 0; $x < 2; $x++) {
+            if ($x == 0) {
                 if ($this->upload->do_upload('ktp')) {
                     $ktp = $this->upload->data('file_name');
                 } else {
                     $this->session->set_flashdata('flash-gagal', $this->upload->display_errors());
-                    redirect('Home/layanan_surat/kelahiran');
+                    redirect('Home/layanan_surat/kematian');
                 }
-            }else {
+            } else {
                 if ($this->upload->do_upload('kk')) {
                     $kk = $this->upload->data('file_name');
                 } else {
                     $this->session->set_flashdata('flash-gagal', $this->upload->display_errors());
-                    redirect('Home/layanan_surat/kelahiran');
+                    redirect('Home/layanan_surat/kematian');
                 }
             }
         }
@@ -248,7 +249,7 @@ class Home extends CI_Controller
 
         $this->Mcrud->create_item($dataInsert, "died_person_identities");
 
-        if($this->db->affected_rows()){
+        if ($this->db->affected_rows()) {
             $dataInsertLetter = array(
                 "applicant_id" => $idApplicant,
                 "request_type" => "kematian",
@@ -261,40 +262,40 @@ class Home extends CI_Controller
             $this->Mcrud->create_item($dataInsertLetter, "letter_requests");
             $this->session->set_flashdata('flash', "Berhasil Menyimpan Data Kematian");
             redirect('Home');
-        }else {
+        } else {
             $this->session->set_flashdata('flash-gagal', "Gagal Menyimpan Data Kematian");
-            redirect('Home/layanan_surat/kelahiran');
+            redirect('Home/layanan_surat/kematian');
         }
     }
 
-    private function letter_request_move($idApplicant, $type) {
+    private function letter_request_move($idApplicant, $type)
+    {
         $id = $this->Mcrud->generate_id('move_identities');
         $alamatAsal = $this->input->post('alamat-asal', true);
         $alamatTujuan = $this->input->post('alamat-tujuan', true);
         $alasanPindah = $this->input->post('alasan-pindah', true);
 
-        for($x = 0; $x<3; $x++){
-            if($x == 0) {
+        for ($x = 0; $x < 3; $x++) {
+            if ($x == 0) {
                 if ($this->upload->do_upload('surat-pindah')) {
                     $suratPindah = $this->upload->data('file_name');
                 } else {
                     $this->session->set_flashdata('flash-gagal', $this->upload->display_errors());
-                    redirect('Home/layanan_surat/kelahiran');
+                    redirect('Home/layanan_surat/' . $type);
                 }
-            }else if ($x == 1){
+            } else if ($x == 1) {
                 if ($this->upload->do_upload('kk')) {
                     $kk = $this->upload->data('file_name');
                 } else {
                     $this->session->set_flashdata('flash-gagal', $this->upload->display_errors());
-                    redirect('Home/layanan_surat/kelahiran');
+                    redirect('Home/layanan_surat/' . $type);
                 }
-            }
-            else {
+            } else {
                 if ($this->upload->do_upload('ktp')) {
                     $ktp = $this->upload->data('file_name');
                 } else {
                     $this->session->set_flashdata('flash-gagal', $this->upload->display_errors());
-                    redirect('Home/layanan_surat/kelahiran');
+                    redirect('Home/layanan_surat/' . $type);
                 }
             }
         }
@@ -308,7 +309,7 @@ class Home extends CI_Controller
 
         $this->Mcrud->create_item($dataInsert, "move_identities");
 
-        if($this->db->affected_rows()){
+        if ($this->db->affected_rows()) {
             $dataInsertLetter = array(
                 "applicant_id" => $idApplicant,
                 "request_type" => $type,
@@ -320,11 +321,166 @@ class Home extends CI_Controller
                 "move_id" => $id
             );
             $this->Mcrud->create_item($dataInsertLetter, "letter_requests");
-            $this->session->set_flashdata('flash', "Berhasil Menyimpan Data Perpindahan");
+            $this->session->set_flashdata('flash', "Berhasil Menyimpan Data $type");
             redirect('Home');
-        }else {
-            $this->session->set_flashdata('flash-gagal', "Gagal Menyimpan Data Perpindahan");
-            redirect('Home/layanan_surat/kelahiran');
+        } else {
+            $this->session->set_flashdata('flash-gagal', "Gagal Menyimpan Data $type");
+            redirect('Home/layanan_surat/' . $type);
+        }
+    }
+
+    private function letter_request_business($idApplicant)
+    {
+        $id = $this->Mcrud->generate_id('business_identities');
+        $namaUsaha = $this->input->post('nama-usaha', true);
+        $alamatUsaha = $this->input->post('alamat-usaha', true);
+        $kategoriUsaha = $this->input->post('kategori-usaha', true);
+        $namaPemilikUsaha = $this->input->post('pemilik-usaha', true);
+
+        for ($x = 0; $x < 2; $x++) {
+            if ($x == 0) {
+                if ($this->upload->do_upload('ktp')) {
+                    $ktp = $this->upload->data('file_name');
+                } else {
+                    $this->session->set_flashdata('flash-gagal', $this->upload->display_errors());
+                    redirect('Home/layanan_surat/usaha');
+                }
+            } else {
+                if ($this->upload->do_upload('dokumen-usaha')) {
+                    $dokumenUsaha = $this->upload->data('file_name');
+                } else {
+                    $this->session->set_flashdata('flash-gagal', $this->upload->display_errors());
+                    redirect('Home/layanan_surat/usaha');
+                }
+            }
+        }
+
+        $dataInsert = array(
+            "id" => $id,
+            "business_name" => $namaUsaha,
+            "business_address" => $alamatUsaha,
+            "business_category" => $kategoriUsaha,
+            "owner_name" => $namaPemilikUsaha
+        );
+
+        $this->Mcrud->create_item($dataInsert, "business_identities");
+
+        if ($this->db->affected_rows()) {
+            $dataInsertLetter = array(
+                "applicant_id" => $idApplicant,
+                "request_type" => "usaha",
+                "request_date" => date('Y-m-d'),
+                "request_status" => 1,
+                "att_ktp" => $ktp,
+                "att_business_doc" => $dokumenUsaha,
+                "business_id" => $id
+            );
+            $this->Mcrud->create_item($dataInsertLetter, "letter_requests");
+            $this->session->set_flashdata('flash', "Berhasil Menyimpan Data Usaha");
+            redirect('Home');
+        } else {
+            $this->session->set_flashdata('flash-gagal', "Gagal Menyimpan Data Usaha");
+            redirect('Home/layanan_surat/usaha');
+        }
+    }
+
+    private function letter_request_others($idApplicant, $type)
+    {
+        $id = $this->Mcrud->generate_id('others_identities');
+        $pekerjaan = $this->input->post('pekerjaan', true);
+        $letterType = ($type) == "pengantar-nikah" ? 1 : 2;
+        $deskripsi = ($type) == "pengantar-nikah" ? $type : $this->input->post('deskripsi', true);
+
+        for ($x = 0; $x < 2; $x++) {
+            if ($x == 0) {
+                if ($this->upload->do_upload('ktp')) {
+                    $ktp = $this->upload->data('file_name');
+                } else {
+                    $this->session->set_flashdata('flash-gagal', $this->upload->display_errors());
+                    redirect('Home/layanan_surat/' . $type);
+                }
+            } else {
+                if ($this->upload->do_upload('kk')) {
+                    $kk = $this->upload->data('file_name');
+                } else {
+                    $this->session->set_flashdata('flash-gagal', $this->upload->display_errors());
+                    redirect('Home/layanan_surat/' . $type);
+                }
+            }
+        }
+
+        $dataInsert = array(
+            "id" => $id,
+            "jobs" => $pekerjaan,
+            "type" => $letterType,
+            "description" => $deskripsi
+        );
+
+        $this->Mcrud->create_item($dataInsert, "others_identities");
+
+        if ($this->db->affected_rows()) {
+            $dataInsertLetter = array(
+                "applicant_id" => $idApplicant,
+                "request_type" => $type,
+                "request_date" => date('Y-m-d'),
+                "request_status" => 1,
+                "att_ktp" => $ktp,
+                "att_kk" => $kk,
+                "others_id" => $id
+            );
+            $this->Mcrud->create_item($dataInsertLetter, "letter_requests");
+            $this->session->set_flashdata('flash', "Berhasil Menyimpan Data $type");
+            redirect('Home');
+        } else {
+            $this->session->set_flashdata('flash-gagal', "Gagal Menyimpan Data $type");
+            redirect('Home/layanan_surat/' . $type);
+        }
+    }
+
+    private function letter_request_event($idApplicant)
+    {
+        $id = $this->Mcrud->generate_id('event_identities');
+        $namaKegiatan = $this->input->post('nama-kegiatan', true);
+        $tempatKegiatan = $this->input->post('tempat-kegiatan', true);
+        $lamaPelaksanaan = $this->input->post('lama-kegiatan', true);
+        $tanggalPelaksanaan = $this->input->post('tanggal', true);
+        $waktuMulai = $this->input->post('waktu-mulai', true);
+        $waktuSelesai = $this->input->post('waktu-selesai', true);
+
+        if ($this->upload->do_upload('ktp')) {
+            $ktp = $this->upload->data('file_name');
+        } else {
+            $this->session->set_flashdata('flash-gagal', $this->upload->display_errors());
+            redirect('Home/layanan_surat/izin-kegiatan');
+        }
+
+        $dataInsert = array(
+            "id" => $id,
+            "event_name" => $namaKegiatan,
+            "event_location" => $tempatKegiatan,
+            "event_duration" => $lamaPelaksanaan,
+            "event_date" => $tanggalPelaksanaan,
+            "event_start" => $waktuMulai,
+            "event_end" => $waktuSelesai
+        );
+
+        $this->Mcrud->create_item($dataInsert, "event_identities");
+
+        if ($this->db->affected_rows()) {
+            $dataInsertLetter = array(
+                "applicant_id" => $idApplicant,
+                "request_type" => "izin-kegiatan",
+                "request_date" => date('Y-m-d'),
+                "request_status" => 1,
+                "att_ktp" => $ktp,
+                "event_id" => $id
+            );
+            $this->Mcrud->create_item($dataInsertLetter, "letter_requests");
+            $this->session->set_flashdata('flash', "Berhasil Menyimpan Data Kegiatan");
+            redirect('Home');
+        } else {
+            $this->session->set_flashdata('flash-gagal', "Gagal Menyimpan Data Kegiatan");
+            redirect('Home/layanan_surat/izin-kegiatan');
         }
     }
 }
