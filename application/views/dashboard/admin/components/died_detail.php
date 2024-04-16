@@ -100,6 +100,12 @@
                                   </div>
                               </div>
                           </div>
+                          <?php if($letter->request_status != 3 && $letter->request_status != 4) :?>
+                          <div class="container d-flex justify-content-center p-2">
+                              <a href="<?= site_url('adminpanel/change_to_success/' . $letter->id_letter) ?>" class="btn btn-success mx-2" onclick="return confirm('Apakah Kamu Yakin Mengubah Status Menjadi Selesai ?')"> <i class="fas fa-check-circle"></i>Terima</a>
+                              <a href="<?= site_url('adminpanel/change_to_reject/' . $letter->id_letter) ?>" class="btn btn-danger" onclick="return confirm('Apakah Kamu Yakin Mengubah Status Menjadi Ditolak ?')"> <i class="fas fa-ban"></i>Tolak</a>
+                          </div>
+                            <?php endif?>
 
                       </form>
                   </div>

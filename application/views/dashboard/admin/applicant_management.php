@@ -104,10 +104,7 @@
                                                   <?php if ($item->request_status == 1) : ?>
                                                       <a href="<?=site_url('adminpanel/change_to_process/'.$item->id_letter)?>" class="btn btn-warning"><i class="fas fa-user-check"></i></a>
                                                   <?php endif ?>
-                                                  <?php if ($item->request_status == 2) : ?>
-                                                      <a href="<?=site_url('adminpanel/change_to_success/'.$item->id_letter)?>" class="btn btn-success" onclick="return confirm('Apakah Kamu Yakin Mengubah Status Menjadi Selesai ?')"> <i class="fas fa-check-circle"></i></a>
-                                                      <a href="<?=site_url('adminpanel/change_to_reject/'.$item->id_letter)?>" class="btn btn-danger" onclick="return confirm('Apakah Kamu Yakin Mengubah Status Menjadi Ditolak ?')"> <i class="fas fa-ban"></i></a>
-                                                  <?php endif ?>
+                                                  
 
                                               </td>
                                           </tr>
