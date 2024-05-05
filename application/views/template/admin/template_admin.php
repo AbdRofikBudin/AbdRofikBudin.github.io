@@ -213,7 +213,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="<?= site_url('Dashboard/letter_history') ?>" class="nav-link">
+                            <a href="<?= site_url('adminpanel/mailing_management') ?>" class="nav-link">
 
                                 <i class="nav-icon fas fa-file-pdf"></i>
                                 <p>

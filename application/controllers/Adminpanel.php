@@ -9,6 +9,7 @@ class Adminpanel extends CI_Controller {
         if(!$this->session->userdata('is_admin')){
             redirect('login/admin');
         }
+    
         $this->load->model('Mcrud');
     }
 
@@ -49,6 +50,13 @@ class Adminpanel extends CI_Controller {
         $sql = "SELECT a.id as id_applicant, lr.id as id_letter, a.*, lr.* FROM letter_requests as lr INNER JOIN applicants as a ON lr.applicant_id = a.id ORDER BY lr.request_date DESC";
         $data['letters'] = $this->db->query($sql)->result();
         $this->template->load('template/admin/template_admin', 'dashboard/admin/applicant_management', $data);
+    }
+
+    public function mailing_management() {
+        $data['title'] = "Admin | Managemen Pengajuan Surat";
+        $sql = "SELECT sl.id as id_submission, a.id as id_applicant, lr.id as id_letter, sl.*, a.*, lr.* FROM submission_letter sl INNER JOIN applicants a ON sl.applicant_id = a.id INNER JOIN letter_requests lr ON sl.letter_id = lr.id ORDER BY sl.submission_date DESC";
+        $data['letters'] = $this->db->query($sql)->result();
+        $this->template->load('template/admin/template_admin', 'dashboard/admin/mailing_management', $data);
     }
 
     public function detail_application_management($letter_type, $id){
@@ -126,8 +134,11 @@ class Adminpanel extends CI_Controller {
     }
 
     public function change_to_reject($id){
+        $noted = $this->input->post('noted',true);
+
         $dataUpdate = [
-            'request_status' => 3
+            'request_status' => 3,
+            'noted' => $noted
         ];
 
         $this->Mcrud->update_item($id, $dataUpdate, "letter_requests", "id" );

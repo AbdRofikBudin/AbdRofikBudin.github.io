@@ -8,7 +8,6 @@ class Login extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Mcrud');
-       
     }
 
     public function index()
@@ -44,6 +43,15 @@ class Login extends CI_Controller
             $check_credential = $this->Mcrud->get_items($username, "applicants", "username");
 
             if ($check_credential && $check_credential['verif_status'] != 0) {
+                $session_data = [
+                    "id",
+                    "username",
+                    "nama",
+                    "is_admin"
+                ];
+
+                $this->session->unset_userdata($session_data);
+
                 if (password_verify($password, $check_credential['password'])) {
                     $session_data = [
                         "id" => $check_credential['id'],
@@ -105,6 +113,9 @@ class Login extends CI_Controller
 
             if ($check_credential) {
                 if (password_verify($password, $check_credential['password'])) {
+                    $unset_data = ["id", "username","email", "nama","is_logged"];
+                    $this->session->unset_userdata($unset_data);
+
                     $session_data = [
                         "id" => $check_credential['id'],
                         "username" => $check_credential['username'],
