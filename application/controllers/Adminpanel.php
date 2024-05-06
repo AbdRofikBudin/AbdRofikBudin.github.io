@@ -59,6 +59,11 @@ class Adminpanel extends CI_Controller {
         $this->template->load('template/admin/template_admin', 'dashboard/admin/mailing_management', $data);
     }
 
+    public function electronic_letter(){
+        $data['title'] = "Electronic Letter";
+        $this->template->load('dashboard/admin/letters/main_letter', 'dashboard/admin/letters/component/kegiatan', $data);
+    }
+
     public function detail_application_management($letter_type, $id){
         $data['title'] = "Admin | Detail Managemen Pengajuan";
 
