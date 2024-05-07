@@ -59,9 +59,49 @@ class Adminpanel extends CI_Controller {
         $this->template->load('template/admin/template_admin', 'dashboard/admin/mailing_management', $data);
     }
 
-    public function electronic_letter(){
+    public function electronic_letter($letter_type, $id){
         $data['title'] = "Electronic Letter";
-        $this->template->load('dashboard/admin/letters/main_letter', 'dashboard/admin/letters/component/kegiatan', $data);
+
+        switch ($letter_type) {
+            case "kelahiran":
+                $sql = "SELECT sl.id as submission_id, sl.id as submission_id, a.id as id_applicant, lr.id as id_letter, k.id as id_birth,  sl.*, a.*, lr.*, k.* FROM submission_letter as sl INNER JOIN letter_requests as lr ON sl.letter_id=lr.id INNER JOIN applicants as a ON lr.applicant_id = a.id INNER JOIN birth_baby_identities as k ON lr.birth_baby_id=k.id WHERE sl.id=$id";
+                $url = 'dashboard/admin/letters/component/kelahiran';
+                break;
+            case "kematian":
+                $sql = "SELECT sl.id as submission_id, a.id as id_applicant, lr.id as id_letter, d.id as id_died, d.nik as died_nik,  a.*, lr.*, d.* FROM submission_letter as sl INNER JOIN letter_requests as lr ON sl.letter_id=lr.id INNER JOIN applicants as a ON lr.applicant_id = a.id INNER JOIN died_person_identities as d ON lr.died_person_id=d.id WHERE sl.id=$id";
+                $url = 'dashboard/admin/letters/component/kematian';
+                break;
+            case "usaha":
+                $sql = "SELECT sl.id as submission_id, a.id as id_applicant, lr.id as id_letter, u.id as id_business,  a.*, lr.*, u.* FROM submission_letter as sl INNER JOIN letter_requests as lr ON sl.letter_id=lr.id INNER JOIN applicants as a ON lr.applicant_id = a.id INNER JOIN business_identities as u ON lr.business_id=u.id WHERE sl.id=$id";
+                $url = 'dashboard/admin/letters/component/izin_usaha';
+                break;
+            case "kepindahan":
+                $sql = "SELECT sl.id as submission_id, a.id as id_applicant, lr.id as id_letter, pi.id as id_move,  a.*, lr.*, pi.* FROM submission_letter as sl INNER JOIN letter_requests as lr ON sl.letter_id=lr.id INNER JOIN applicants as a ON lr.applicant_id = a.id INNER JOIN move_identities as pi ON lr.move_id=pi.id WHERE sl.id=$id";
+                $url = 'dashboard/admin/letters/component/kedatangan';
+                break;
+            case "kedatangan":
+                $sql = "SELECT sl.id as submission_id, a.id as id_applicant, lr.id as id_letter, da.id as id_come,  a.*, lr.*, da.* FROM submission_letter as sl INNER JOIN letter_requests as lr ON sl.letter_id=lr.id INNER JOIN applicants as a ON lr.applicant_id = a.id INNER JOIN move_identities as da ON lr.move_id=da.id WHERE sl.id=$id";
+                $url = 'dashboard/admin/letters/component/kedatangan';
+                break;
+            case "izin-kegiatan":
+                $sql = "SELECT sl.id as submission_id, a.id as id_applicant, lr.id as id_letter, ik.id as id_kegiatan,  a.*, lr.*, ik.* FROM submission_letter as sl INNER JOIN letter_requests as lr ON sl.letter_id=lr.id INNER JOIN applicants as a ON lr.applicant_id = a.id INNER JOIN event_identities as ik ON lr.event_id=ik.id WHERE sl.id=$id";
+                $url = 'dashboard/admin/letters/component/kegiatan';
+                break;
+            case "pengantar-nikah":
+                $sql = "SELECT sl.id as submission_id, a.id as id_applicant, a.nik as nik_applicant, lr.id as id_letter, pn.id as id_nikah,  a.*, lr.*, pn.* FROM submission_letter as sl INNER JOIN letter_requests as lr ON sl.letter_id=lr.id INNER JOIN applicants as a ON lr.applicant_id = a.id INNER JOIN others_identities as pn ON lr.others_id=pn.id WHERE sl.id=$id";
+                $url = 'dashboard/admin/letters/component/izin_nikah';
+                break;
+            case "kurang-mampu":
+                $sql = "SELECT sl.id as submission_id, a.id as id_applicant, a.nik as nik_applicant, lr.id as id_letter, km.id as id_miskin,  a.*, lr.*, km.* FROM submission_letter as sl INNER JOIN letter_requests as lr ON sl.letter_id=lr.id INNER JOIN applicants as a ON lr.applicant_id = a.id INNER JOIN others_identities as km ON lr.others_id=km.id WHERE sl.id=$id";
+                $url = 'dashboard/admin/components/tidak_mampu';
+                break;
+            default:
+                redirect('adminpanel');
+                break;
+        }
+
+        $data['detail_letter'] = $this->db->query($sql)->row_object();
+        $this->template->load('dashboard/admin/letters/main_letter', $url, $data);
     }
 
     public function detail_application_management($letter_type, $id){
@@ -108,6 +148,49 @@ class Adminpanel extends CI_Controller {
 
         $data['letter'] = $this->db->query($sql)->row_object();
         $this->template->load('template/admin/template_admin', $url, $data);
+    }
+
+    public function change_letter_to_process($id) {
+        $dataUpdate = [
+            'status' => 2
+        ];
+
+        $this->Mcrud->update_item($id, $dataUpdate, "submission_letter", "id" );
+
+        if($this->db->affected_rows()){
+           redirect('adminpanel/mailing_management');
+        }else {
+            redirect('adminpanel/mailing_management');
+        }
+    }
+
+
+    public function change_letter_to_send($id) {
+        $dataUpdate = [
+            'status' => 3
+        ];
+
+        $this->Mcrud->update_item($id, $dataUpdate, "submission_letter", "id" );
+
+        if($this->db->affected_rows()){
+           redirect('adminpanel/mailing_management');
+        }else {
+            redirect('adminpanel/mailing_management');
+        }
+    }
+
+    public function change_letter_to_done($id) {
+        $dataUpdate = [
+            'status' => 4
+        ];
+
+        $this->Mcrud->update_item($id, $dataUpdate, "submission_letter", "id" );
+
+        if($this->db->affected_rows()){
+           redirect('adminpanel/mailing_management');
+        }else {
+            redirect('adminpanel/mailing_management');
+        }
     }
 
     public function change_to_process($id){

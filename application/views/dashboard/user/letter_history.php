@@ -35,7 +35,7 @@
                                           <th>Tipe Pengajuan Surat</th>
                                           <th>Tanggal Pengajuan</th>
                                           <th>Status</th>
-                                          <!-- <th>Action</th> -->
+                                          <th>Action</th>
                                       </tr>
                                   </thead>
                                   <tbody>
@@ -65,9 +65,49 @@
                                                     }
 
                                                     ?></td>
-                                              <!-- <td>
-                                                  <a href="#" class="btn btn-primary">Lihat</a>
-                                              </td> -->
+                                              <td>
+                                                  <a href="<?= site_url('dashboard/detail_letter/' . $item->request_type . '/' . $item->id) ?>" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+
+                                                  <?php if ($item->request_status == 4) : ?>
+                                                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-request"> <i class="fas fa-file-pdf"></i></button>
+
+                                                      <div class="modal fade" id="modal-request">
+                                                          <div class="modal-dialog modal-dialog-centered">
+                                                              <div class="modal-content">
+                                                                  <div class="modal-header">
+                                                                      <h4 class="modal-title">Pengajuan Dokumen Fisik</h4>
+                                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                          <span aria-hidden="true">&times;</span>
+                                                                      </button>
+                                                                  </div>
+                                                                  <form action="<?= site_url('dashboard/action_letter_doc') ?>" method="post">
+                                                                      <div class="modal-body">
+
+                                                                          <div class="mb-3">
+                                                                              <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
+                                                                              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required name="alamat"></textarea>
+                                                                          </div>
+
+                                                                          <div class="mb-3">
+                                                                              <label for="exampleFormControlTextarea1" class="form-label">No. Whatsapp</label>
+                                                                              <input type="hidden" name="applicant_id" value="<?= $this->session->userdata('id') ?>">
+                                                                              <input type="hidden" name="letter_id" value="<?= $item->id ?>">
+                                                                              <input type="text" class="form-control" id="exampleFormControlTextarea1" required name="wa"></input>
+                                                                          </div>
+
+                                                                      </div>
+                                                                      <div class="modal-footer justify-content-between">
+                                                                          <button type="submit" class="btn btn-primary">Simpan</button>
+                                                                      </div>
+                                                                  </form>
+                                                              </div>
+                                                              <!-- /.modal-content -->
+                                                          </div>
+                                                          <!-- /.modal-dialog -->
+                                                      </div>
+                                                      <!-- /.modal -->
+                                                  <?php endif ?>
+                                              </td>
                                           </tr>
                                       <?php endforeach ?>
                                   </tbody>

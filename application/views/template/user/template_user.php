@@ -124,7 +124,24 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="<?= site_url('Dashboard/letter_document_history') ?>" class="nav-link">
+                            <i class="nav-icon fas fa-file"></i>
+                               
+                                <p>
+                                    Pengajuan Dokumen
+                                </p>
+                            </a>
+                        </li>
 
+                        <li class="nav-item">
+                            <a href="<?= site_url('Dashboard/edit_profile') ?>" class="nav-link">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>
+                                    Edit Profile
+                                </p>
+                            </a>
+                        </li>
 
                         <li class="nav-item">
                             <a href="<?= site_url('Login/signout') ?>" class="nav-link">

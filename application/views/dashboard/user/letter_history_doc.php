@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Management Permohonan Pengajuan Surat</h1>
+                    <h1>Riwayat Pengajuan Dokumen Fisik</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?= site_url('adminpanel') ?>">Home</a></li>
-                        <li class="breadcrumb-item active">Management Permohonan Pengajuan Surat</li>
+                        <li class="breadcrumb-item"><a href="<?= site_url('dashboard/user') ?>">Home</a></li>
+                        <li class="breadcrumb-item active">Riwayat Pengajuan Dokumen Fisik</li>
                     </ol>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Permohonan Pengajuan Surat</h3>
+                            <h3 class="card-title">Data Riwayat Pengajuan Dokumen Fisik</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -38,7 +38,6 @@
                                         <th>Whatsapp</th>
                                         <th>Alamat Lengkap</th>
                                         <th>Status</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -106,26 +105,7 @@
                                                 }
 
                                                 ?></td>
-                                            <td>
-                                                <?php if ($item->status == 1) : ?>
-                                                    <a href="<?=site_url('adminpanel/change_letter_to_process/'.$item->id_submission)?>" class="btn btn-warning"><i class="fas fa-user-check"></i></a>
-                                                <?php endif ?>
-
-                                                <?php if ($item->status == 2) : ?>
-                                                    <a href="<?=site_url('adminpanel/change_letter_to_send/'.$item->id_submission)?>" class="btn btn-primary"><i class="far fa-paper-plane"></i></a>
-                                                    <a href="<?=site_url('adminpanel/electronic_letter/'.$item->request_type.'/'.$item->id_submission)?>" class="btn btn-danger my-1"><i class="fas fa-print"></i></a>
-                                                <?php endif ?>
-
-                                                <?php if ($item->status == 3) : ?>
-                                                    <a href="<?=site_url('adminpanel/change_letter_to_done/'.$item->id_submission)?>" class="btn btn-success"><i class="fas fa-check"></i></a>
-                                                    <a href="<?=site_url('adminpanel/electronic_letter/'.$item->request_type.'/'.$item->id_submission)?>" class="btn btn-danger my-1"><i class="fas fa-print"></i></a>
-                                                <?php endif ?>
-
-                                                <?php if ($item->status == 4) : ?>
-                                                    <a href="<?=site_url('adminpanel/electronic_letter/'.$item->request_type.'/'.$item->id_submission)?>" class="btn btn-danger my-1"><i class="fas fa-print"></i></a>
-                                                <?php endif ?>
-                                                
-                                            </td>
+                                           
                                         </tr>
 
 
