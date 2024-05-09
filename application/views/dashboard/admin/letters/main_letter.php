@@ -43,6 +43,23 @@
 
 <body>
     <?php
+    $nama_bulan_indonesia = array(
+        'January' => 'Januari',
+        'February' => 'Februari',
+        'March' => 'Maret',
+        'April' => 'April',
+        'May' => 'Mei',
+        'June' => 'Juni',
+        'July' => 'Juli',
+        'August' => 'Agustus',
+        'September' => 'September',
+        'October' => 'Oktober',
+        'November' => 'November',
+        'December' => 'Desember'
+    );
+    $day = date('d');
+    $month = date('F');
+    $year = date('Y');
     $letter = "";
     switch ($detail_letter->request_type) {
         case "kelahiran":
@@ -105,7 +122,7 @@
             </div>
             <?= $contents ?>
             <p class="text-end pe-4">
-                Lafeu, <?= date('d M Y') ?>
+                Lafeu, <?= $day." ".$nama_bulan_indonesia[$month]." ".$year ?>
                 <br>
                 Kepala Desa Lafeu
             </p>

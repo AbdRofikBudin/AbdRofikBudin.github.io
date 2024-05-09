@@ -64,7 +64,34 @@
                                                             echo '<span class="badge badge-info">Unknown</span>';
                                                     }
 
-                                                    ?></td>
+                                                    ?>
+                                                    <?php if ($item->request_status == 3) : ?>
+                                                    <button type="button" class="btn" data-toggle="modal" data-target="#modal-request-<?= $item->id ?>"> <i class="fas fa-info-circle"></i></button>
+
+                                                    <div class="modal fade" id="modal-request-<?= $item->id ?>">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Alasan Ditolak</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                               
+                                                                    <div class="modal-body">
+
+                                                                       <?=$item->noted?>
+
+                                                                    </div>
+                                                               
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
+                                                    <!-- /.modal -->
+                                                <?php endif ?>
+                                                </td>
                                               <td>
                                                   <a href="<?= site_url('dashboard/detail_letter/' . $item->request_type . '/' . $item->id) ?>" class="btn btn-primary"><i class="fas fa-eye"></i></a>
 

@@ -22,9 +22,28 @@
             </td>
         </tr>
         <tr>
+        <?php
+             $nama_bulan_indonesia = array(
+                'January' => 'Januari',
+                'February' => 'Februari',
+                'March' => 'Maret',
+                'April' => 'April',
+                'May' => 'Mei',
+                'June' => 'Juni',
+                'July' => 'Juli',
+                'August' => 'Agustus',
+                'September' => 'September',
+                'October' => 'Oktober',
+                'November' => 'November',
+                'December' => 'Desember'
+            );
+                  $day = date('d', strtotime($detail_letter->birth_date));
+                  $month = date('F', strtotime($detail_letter->birth_date));
+                  $year = date('Y', strtotime($detail_letter->birth_date));
+            ?>
             <td class="cell-head">Tempat, Tanggal Lahir</td>
             <td>:</td>
-            <td><?= ucfirst($detail_letter->birth_place) ?>, <?= date('d M Y', strtotime($detail_letter->birth_date)) ?></td>
+            <td><?= ucfirst($detail_letter->birth_place) ?>, <?= $day." ".$nama_bulan_indonesia[$month]." ".$year ?></td>
         </tr>
         <tr>
             <td class="cell-head">Umur</td>
@@ -43,6 +62,13 @@
 <div class="container-fluid px-3">
     <table>
         <tr>
+        <?php
+           
+                  $day = date('d', strtotime($detail_letter->died_date));
+                  $month = date('F', strtotime($detail_letter->died_date));
+                  $year = date('Y', strtotime($detail_letter->died_date));
+            ?>
+
             <?php
             $nama_hari_indonesia = array(
                 'Sunday' => 'Minggu',
@@ -59,7 +85,7 @@
             ?>
             <td class="cell-head">Hari, Tanggal</td>
             <td>:</td>
-            <td><?= $nama_hari_indonesia[$hari] ?>, <?= date('d M Y', strtotime($detail_letter->died_date)) ?></td>
+            <td><?= $nama_hari_indonesia[$hari] ?>, <?= $day." ".$nama_bulan_indonesia[$month]." ".$year ?></td>
         </tr>
         <tr>
             <td class="cell-head">Bertempat di</td>
@@ -93,9 +119,14 @@
             </td>
         </tr>
         <tr>
+        <?php
+                  $day = date('d', strtotime($detail_letter->date_of_birth));
+                  $month = date('F', strtotime($detail_letter->date_of_birth));
+                  $year = date('Y', strtotime($detail_letter->date_of_birth));
+            ?>
             <td class="cell-head">Tempat, Tanggal Lahir</td>
             <td>:</td>
-            <td><?= ucfirst($detail_letter->place_of_birth) ?>, <?= date('d M Y', strtotime($detail_letter->date_of_birth)) ?></td>
+            <td><?= ucfirst($detail_letter->place_of_birth) ?>, <?= $day." ".$nama_bulan_indonesia[$month]." ".$year ?></td>
         </tr>
         <tr>
             <td class="cell-head">Agama</td>

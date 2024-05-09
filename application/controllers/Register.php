@@ -152,10 +152,10 @@ class Register extends CI_Controller
 
             if ($this->db->affected_rows()) {
                 $this->sendMail($email, $username);
-                $this->session->set_userdata('flash', "Register Berhasil");
+                $this->session->set_flashdata('flash', "Register Berhasil, Silahkan Cek Email untuk Verifikasi Data");
                 redirect("Register");
             } else {
-                $this->session->set_userdata('flash-gagal', "Register Gagal");
+                $this->session->set_flashdata('flash-gagal', "Register Gagal");
                 redirect("Register");
             }
         }
@@ -174,10 +174,10 @@ class Register extends CI_Controller
 
             if ($this->db->affected_rows()) {
                 $this->session->set_userdata('flash', "Verifikasi User Berhasil");
-                redirect("Register");
+                redirect("login");
             } else {
                 $this->session->set_userdata('flash-gagal', "Verifikasi User Gagal");
-                redirect("Register");
+                redirect("login");
             }
         } else {
             if ($data['verif_status'] == 1) {
@@ -186,7 +186,7 @@ class Register extends CI_Controller
                 $this->session->set_userdata('flash-gagal', "Data User Tidak Ditemukan");
             }
 
-            redirect("Register");
+            redirect("login");
         }
     }
 }

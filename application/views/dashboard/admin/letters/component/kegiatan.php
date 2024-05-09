@@ -12,9 +12,28 @@
             <td><?= ucfirst($detail_letter->event_location)?></td>
         </tr>
         <tr>
+        <?php
+             $nama_bulan_indonesia = array(
+                'January' => 'Januari',
+                'February' => 'Februari',
+                'March' => 'Maret',
+                'April' => 'April',
+                'May' => 'Mei',
+                'June' => 'Juni',
+                'July' => 'Juli',
+                'August' => 'Agustus',
+                'September' => 'September',
+                'October' => 'Oktober',
+                'November' => 'November',
+                'December' => 'Desember'
+            );
+                  $day = date('d', strtotime($detail_letter->event_date));
+                  $month = date('F', strtotime($detail_letter->event_date));
+                  $year = date('Y', strtotime($detail_letter->event_date));
+            ?>
             <td class="cell-head">Tanggal Kegiatan</td>
             <td>:</td>
-            <td><?= date('d M Y', strtotime($detail_letter->event_date))?></td>
+            <td><?= $day." ".$nama_bulan_indonesia[$month]." ".$year ?></td>
         </tr>
         <tr>
             <td class="cell-head">Lama Hari</td>

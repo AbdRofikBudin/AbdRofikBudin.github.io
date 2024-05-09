@@ -37,20 +37,14 @@
                 <div class="col-8 text-center p-4 rounded shadow">
                     <div class="container text-center mb-4">
                         <h1 class="display-6 fw-medium">User Register</h1>
-                        <?php if ($this->session->userdata('flash')) : ?>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Yeayy!</strong> <?= $this->session->userdata('flash') ?>.
-                                <?= $this->session->unset_userdata('flash') ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        <?php endif ?>
-                        <?php if ($this->session->userdata('flash-gagal')) : ?>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>Maaf!</strong> <?= $this->session->userdata('flash-gagal') ?>.
-                                <?= $this->session->unset_userdata('flash-gagal') ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        <?php endif ?>
+                        <?php if ($this->session->flashdata('flash')) : ?>
+                            <div class="flash-success" data-flash="<?= $this->session->flashdata('flash'); ?>"></div>
+                            <?php unset($_SESSION['flash']); ?>
+                        <?php endif; ?>
+                        <?php if ($this->session->flashdata('flash-gagal')) : ?>
+                            <div class="flash-fail" data-flash="<?= $this->session->flashdata('flash-gagal'); ?>"></div>
+                            <?php unset($_SESSION['flash-gagal']); ?>
+                        <?php endif; ?>
                         <?php if ($error) : ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <strong>Maaf!</strong>
@@ -172,6 +166,30 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        var successAlert = $('.flash-success').data('flash');
+
+        if (successAlert) {
+            Swal.fire({
+                title: "Yeayy!",
+                text: successAlert,
+                icon: "success"
+            });
+        }
+
+        var failAlert = $('.flash-fail').data('flash');
+
+        if (failAlert) {
+            Swal.fire({
+                title: "Maaf!",
+                text: failAlert,
+                icon: "warning"
+            });
+        }
+    </script>
 </body>
 
 </html>
