@@ -4,37 +4,48 @@
         <tr>
             <td class="cell-head">Nama Kegiatan</td>
             <td>:</td>
-            <td>{{NAMA_PELAPOR}}</td>
+            <td><?= ucfirst($detail_letter->event_name)?></td>
         </tr>
         <tr>
             <td class="cell-head">Tempat Kegiatan</td>
             <td>:</td>
-            <td>{{NAMA}}</td>
+            <td><?= ucfirst($detail_letter->event_location)?></td>
         </tr>
         <tr>
             <td class="cell-head">Tanggal Kegiatan</td>
             <td>:</td>
-            <td>{{NIK_PELAPOR}}</td>
+            <td><?= date('d M Y', strtotime($detail_letter->event_date))?></td>
         </tr>
         <tr>
             <td class="cell-head">Lama Hari</td>
             <td>:</td>
-            <td>{{NAMA_PELAPOR}}</td>
+            <td><?= ucfirst($detail_letter->event_duration)?> Hari</td>
         </tr>
         <tr>
             <td class="cell-head">Durasi Jam Kegiatan</td>
             <td>:</td>
-            <td>{{GENDER_PELAPOR}}</td>
+            <td>
+                <?php 
+                    $waktuStart = strtotime($detail_letter->event_start);
+                    $waktuAkhir = strtotime($detail_letter->event_end);
+
+                    $perbedaan = abs($waktuAkhir - $waktuStart);
+
+                    $jam = $perbedaan / (60*60);
+
+                    echo intval($jam)." Jam";
+                ?>
+            </td>
         </tr>
         <tr>
             <td class="cell-head">NIK Penanggung Jawab</td>
             <td>:</td>
-            <td>{{TEMPAT, TANGGAL LAHIR}}</td>
+            <td><?= ucfirst($detail_letter->nik)?></td>
         </tr>
         <tr>
             <td class="cell-head">Nama Penanggung Jawab</td>
             <td>:</td>
-            <td>{{AGAMA_PELAPOR}}</td>
+            <td><?= ucfirst($detail_letter->applicant_name)?></td>
         </tr>
     </table>
 </div>

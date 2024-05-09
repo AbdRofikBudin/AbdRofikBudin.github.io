@@ -4,72 +4,78 @@
         <tr>
             <td class="cell-head">NIK</td>
             <td>:</td>
-            <td>{{NIK_PELAPOR}}</td>
+            <td><?= ucfirst($detail_letter->nik)?></td>
         </tr>
         <tr>
             <td class="cell-head">Nama</td>
             <td>:</td>
-            <td>{{NAMA_PELAPOR}}</td>
+            <td><?= ucfirst($detail_letter->applicant_name)?></td>
         </tr>
         <tr>
             <td class="cell-head">Jenis Kelamin</td>
             <td>:</td>
-            <td>{{GENDER_PELAPOR}}</td>
+            <td>
+            <?php if($detail_letter->gender == 1) { ?>
+                    Laki - Laki
+                <?php } else {?>
+                    Perempuan
+                <?php } ?>
+            </td>
         </tr>
         <tr>
             <td class="cell-head">Tempat, Tanggal Lahir</td>
             <td>:</td>
-            <td>{{TEMPAT, TANGGAL LAHIR}}</td>
+            <td><?= ucfirst($detail_letter->place_of_birth)?>, <?= date('d M Y', strtotime($detail_letter->date_of_birth))?></td>
         </tr>
         <tr>
             <td class="cell-head">Agama</td>
             <td>:</td>
-            <td>{{AGAMA_PELAPOR}}</td>
+            <td><?= ucfirst($detail_letter->religion)?></td>
         </tr>
         <tr>
             <td class="cell-head">Alamat</td>
             <td>:</td>
-            <td>{{ALAMAT_PELAPOR}}</td>
+            <td><?= ucfirst($detail_letter->address)?></td>
         </tr>
     </table>
 </div>
-<p class="mt-3">Telah lahir seorang anak {{GENDER_ANAK}},</p>
+<p class="mt-3">Telah lahir seorang anak <?= $detail_letter->baby_gender == 1 ? "Laki - Laki" : "Perempuan" ?>,</p>
 <div class="container-fluid px-3">
     <table>
         <tr>
             <td class="cell-head">Nama</td>
             <td>:</td>
-            <td>{{Nama}}</td>
+            <td><?= ucfirst($detail_letter->baby_name)?></td>
         </tr>
         <tr>
             <td class="cell-head">Agama</td>
             <td>:</td>
-            <td>{{Agama}}</td>
+            <td><?= ucfirst($detail_letter->baby_religion)?></td>
         </tr>
     </table>
 </div>
-<p class="mt-3">Anak ke-{{URUTAN_ANAK}} dari orang tua,</p>
+<p class="mt-3">Anak ke-<?=$detail_letter->child_order?> dari orang tua,</p>
 <div class="container-fluid px-3">
     <table>
         <tr>
             <td class="cell-head">Nama Ibu Kandung</td>
             <td>:</td>
-            <td>{{Nama}}</td>
+            <td><?= ucfirst($detail_letter->mother_name)?></td>
         </tr>
         <tr>
             <td class="cell-head">NIK Ibu Kandung</td>
             <td>:</td>
-            <td>{{NIK}}</td>
+            <td><?= ucfirst($detail_letter->mother_nik)?></td>
         </tr>
         <tr>
             <td class="cell-head">Nama Ayah Kandung</td>
             <td>:</td>
-            <td>{{Nama}}</td>
+            <td><?= ucfirst($detail_letter->father_name)?></td>
         </tr>
         <tr>
             <td class="cell-head">NIK Ayah Kandung</td>
             <td>:</td>
-            <td>{{NIK}}</td>
+            <td><?= ucfirst($detail_letter->father_nik)?></td>
         </tr>
     </table>
 </div>

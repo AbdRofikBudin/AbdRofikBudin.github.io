@@ -32,6 +32,93 @@
     <link rel="stylesheet" href="<?= base_url('assets/admin_template/') ?>plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 
+<style>
+    #Fullscreen {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #Fullscreen img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    #FullscreenKK {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #FullscreenKK img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    #FullscreenUsaha {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #FullscreenUsaha img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    #FullscreenMove {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #FullscreenMove img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    #FullscreenBirth {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #FullscreenBirth img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+</style>
+
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
@@ -96,7 +183,7 @@
                         <img class="rounded-circle" width="32" alt="Image placeholder" src="https://ui-avatars.com/api/?name=<?= $this->session->userdata('username') ?>&background=random&color=fff">
                     </div>
                     <div class="info">
-                        <a href="<?=site_url('Dashboard/user')?>" class="d-block"><?= $this->session->userdata('username') ?></a>
+                        <a href="<?= site_url('Dashboard/user') ?>" class="d-block"><?= $this->session->userdata('username') ?></a>
                     </div>
                 </div>
 
@@ -126,8 +213,8 @@
 
                         <li class="nav-item">
                             <a href="<?= site_url('Dashboard/letter_document_history') ?>" class="nav-link">
-                            <i class="nav-icon fas fa-file"></i>
-                               
+                                <i class="nav-icon fas fa-file"></i>
+
                                 <p>
                                     Pengajuan Dokumen
                                 </p>
@@ -226,6 +313,9 @@
     <script src="<?= base_url('assets/admin_template/') ?>plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="<?= base_url('assets/admin_template/') ?>plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         $(function() {
             $('#example2').DataTable({
@@ -238,6 +328,26 @@
                 "responsive": true,
             });
         });
+
+        var successAlert = $('.flash-success').data('flash');
+
+        if (successAlert) {
+            Swal.fire({
+                title: "Yeayy!",
+                text: successAlert,
+                icon: "success"
+            });
+        }
+
+        var failAlert = $('.flash-fail').data('flash');
+
+        if (failAlert) {
+            Swal.fire({
+                title: "Maaf!",
+                text: failAlert,
+                icon: "warning"
+            });
+        }
     </script>
 </body>
 

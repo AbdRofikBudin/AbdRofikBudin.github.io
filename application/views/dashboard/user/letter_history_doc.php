@@ -16,7 +16,14 @@
             </div>
         </div><!-- /.container-fluid -->
     </section>
-
+    <?php if ($this->session->flashdata('flash')) : ?>
+        <div class="flash-success" data-flash="<?= $this->session->flashdata('flash'); ?>"></div>
+        <?php unset($_SESSION['flash']); ?>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('flash-gagal')) : ?>
+        <div class="flash-fail" data-flash="<?= $this->session->flashdata('flash-gagal'); ?>"></div>
+        <?php unset($_SESSION['flash-gagal']); ?>
+    <?php endif; ?>
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -38,6 +45,7 @@
                                         <th>Whatsapp</th>
                                         <th>Alamat Lengkap</th>
                                         <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -105,9 +113,13 @@
                                                 }
 
                                                 ?></td>
+                                                <td>
+                                                <?php if ($item->status == 3 || $item->status == 4) : ?>
+                                                    <a href="<?=site_url('dashboard/electronic_letter/'.$item->request_type.'/'.$item->id_submission)?>" class="btn btn-danger my-1"><i class="fas fa-print"></i></a>
+                                                <?php endif ?>
+                                                </td>
                                            
                                         </tr>
-
 
                                     <?php endforeach ?>
                                 </tbody>

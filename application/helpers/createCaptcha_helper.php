@@ -12,7 +12,13 @@ function createCaptcha()
             'img_height'    => 40,
             'word_length'   => 5,
             'font_size'     => 20,
-            'expiration' => 900
+            'expiration' => 900,
+            'colors'        => array(
+                'background' => array(255, 255, 255),
+                'border' => array(255, 255, 255),
+                'text' => array(0, 0, 0),
+                'grid' => array(255, 40, 40)
+            )
         );
         
 

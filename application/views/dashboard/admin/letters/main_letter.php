@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Keterangan {{}}</title>
+    <title>Surat Electronic</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
@@ -42,6 +42,45 @@
 </head>
 
 <body>
+    <?php
+    $letter = "";
+    switch ($detail_letter->request_type) {
+        case "kelahiran":
+            $letter = "SURAT KETERANG KELAHIRAN";
+            $no = "N-";
+            break;
+        case "kematian":
+            $letter = "SURAT KETERANG KEMATIAN";
+            $no = "M-";
+            break;
+        case "usaha":
+            $letter = "SURAT KETERANGAN USAHA";
+            $no = "B-";
+            break;
+        case "kepindahan":
+            $letter = "SURAT PENGANTAR PINDAH-DATANG ANTAR KABUPATEN/PROVINSI";
+            $no = "A1-";
+            break;
+        case "kedatangan":
+            $letter = "SURAT PENGANTAR PINDAH-DATANG ANTAR KABUPATEN/PROVINSI";
+            $no = "A2-";
+            break;
+        case "izin-kegiatan":
+            $letter = "SURAT IZIN KEGIATAN";
+            $no = "E-";
+            break;
+        case "pengantar-nikah":
+            $letter = "SURAT PENGANTAR NIKAH";
+            $no = "MN-";
+            break;
+        case "kurang-mampu":
+            $letter = "SURAT KETERANGAN TIDAK MAMPU";
+            $no = "P-";
+            break;
+        default:
+            redirect('adminpanel');
+            break;
+    } ?>
     <div class="letter mt-2">
         <div class="container d-flex justify-content-center gap-5">
             <img src="<?= base_url('assets/img/morowali.png') ?>" alt="logo" width="80" height="105" style="margin-left: -80pt;">
@@ -61,12 +100,12 @@
         <hr class="mx-5" style="margin-top: -3pt">
         <div class="container-fluid mt-4 px-5">
             <div class="container">
-                <h2 class="text-center fs-6 fw-bold text-decoration-underline">SURAT KETERANGAN {{}}</h2>
-                <p class="text-center">Nomor : {{id surat}}</p>
+                <h2 class="text-center fs-6 fw-bold text-decoration-underline"><?=$letter?></h2>
+                <p class="text-center">Nomor : <?=$no;echo $letter_no?></p>
             </div>
-            <?=$contents?>
+            <?= $contents ?>
             <p class="text-end pe-4">
-                Lafeu, <?= date('d M Y')?>
+                Lafeu, <?= date('d M Y') ?>
                 <br>
                 Kepala Desa Lafeu
             </p>

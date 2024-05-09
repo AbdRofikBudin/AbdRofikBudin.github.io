@@ -68,7 +68,7 @@ class Adminpanel extends CI_Controller {
                 $url = 'dashboard/admin/letters/component/kelahiran';
                 break;
             case "kematian":
-                $sql = "SELECT sl.id as submission_id, a.id as id_applicant, lr.id as id_letter, d.id as id_died, d.nik as died_nik,  a.*, lr.*, d.* FROM submission_letter as sl INNER JOIN letter_requests as lr ON sl.letter_id=lr.id INNER JOIN applicants as a ON lr.applicant_id = a.id INNER JOIN died_person_identities as d ON lr.died_person_id=d.id WHERE sl.id=$id";
+                $sql = "SELECT sl.id as submission_id, a.id as id_applicant, lr.id as id_letter, d.id as id_died, d.nik as died_nik, d.religion as died_religion, a.*, lr.*, d.* FROM submission_letter as sl INNER JOIN letter_requests as lr ON sl.letter_id=lr.id INNER JOIN applicants as a ON lr.applicant_id = a.id INNER JOIN died_person_identities as d ON lr.died_person_id=d.id WHERE sl.id=$id";
                 $url = 'dashboard/admin/letters/component/kematian';
                 break;
             case "usaha":
@@ -93,7 +93,7 @@ class Adminpanel extends CI_Controller {
                 break;
             case "kurang-mampu":
                 $sql = "SELECT sl.id as submission_id, a.id as id_applicant, a.nik as nik_applicant, lr.id as id_letter, km.id as id_miskin,  a.*, lr.*, km.* FROM submission_letter as sl INNER JOIN letter_requests as lr ON sl.letter_id=lr.id INNER JOIN applicants as a ON lr.applicant_id = a.id INNER JOIN others_identities as km ON lr.others_id=km.id WHERE sl.id=$id";
-                $url = 'dashboard/admin/components/tidak_mampu';
+                $url = 'dashboard/admin/letters/component/tidak_mampu';
                 break;
             default:
                 redirect('adminpanel');
@@ -101,6 +101,7 @@ class Adminpanel extends CI_Controller {
         }
 
         $data['detail_letter'] = $this->db->query($sql)->row_object();
+        $data['letter_no'] = $this->Mcrud->generate_letter_no("letter_requests");
         $this->template->load('dashboard/admin/letters/main_letter', $url, $data);
     }
 

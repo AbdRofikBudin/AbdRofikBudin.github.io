@@ -42,7 +42,7 @@
                                       <?php $x = 1 ?>
                                       <?php foreach ($letters as $item) : ?>
                                           <tr>
-                                              <td><?= $x++ ?></td>
+                                              <td><?= $item->id ?></td>
                                               <td><?= ucfirst($item->request_type) ?></td>
                                               <td><?= date('d M Y', strtotime($item->request_date)) ?></td>
                                               <td><?php
@@ -69,9 +69,9 @@
                                                   <a href="<?= site_url('dashboard/detail_letter/' . $item->request_type . '/' . $item->id) ?>" class="btn btn-primary"><i class="fas fa-eye"></i></a>
 
                                                   <?php if ($item->request_status == 4) : ?>
-                                                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-request"> <i class="fas fa-file-pdf"></i></button>
+                                                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-request-<?=$item->id?>"> <i class="fas fa-file-pdf"></i></button>
 
-                                                      <div class="modal fade" id="modal-request">
+                                                      <div class="modal fade" id="modal-request-<?=$item->id?>">
                                                           <div class="modal-dialog modal-dialog-centered">
                                                               <div class="modal-content">
                                                                   <div class="modal-header">
