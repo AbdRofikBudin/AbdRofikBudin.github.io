@@ -49,8 +49,8 @@
                     Desa Lafeu
                 </p>
             </a>
-            <p class="text-center d-none d-lg-block" style="margin-left: -120px;">Jl. Raya Medina No. 5, Lafeu, Bungku Pesisir, <br>
-                Morowali, Sulawesi Tengah 12731</p>
+            <p class="text-center d-none d-lg-block" style="margin-left: -120px;">Lr. Puskesmas Lafeu No. <br>
+            Desa Lafeu Kode Pos 94981</p>
             <a class="btn btn-outline-secondary" href="<?= ($this->session->userdata('is_logged')) ? site_url('Dashboard/user') : site_url('Login') ?>"><?= ($this->session->userdata('is_logged')) ? $this->session->userdata('username') : "Masuk" ?></a>
         </div>
     </nav>

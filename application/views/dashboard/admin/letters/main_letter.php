@@ -109,7 +109,7 @@
                 </h1>
                 <h2 class="text-center fw-bold fs-4">DESA LAFEU</h2>
                 <p class="text-center" style="font-size: 12px;">
-                    Dusun III, Desa Lafeu, Kecamatan Bungku Pesisir, Kabupaten Morowali
+                Lr. Puskesmas Lafeu No.   Desa Lafeu Kode Pos 94981
                 </p>
 
             </div>
@@ -118,15 +118,18 @@
         <div class="container-fluid mt-4 px-5">
             <div class="container">
                 <h2 class="text-center fs-6 fw-bold text-decoration-underline"><?=$letter?></h2>
-                <p class="text-center">Nomor : <?=$no;echo $letter_no?></p>
+                <p class="text-center">Nomor : <?=$detail_letter->no_letter?></p>
             </div>
             <?= $contents ?>
-            <p class="text-end pe-4">
+            <p class="text-end pe-3">
                 Lafeu, <?= $day." ".$nama_bulan_indonesia[$month]." ".$year ?>
                 <br>
                 Kepala Desa Lafeu
             </p>
-            <p class="text-end pe-4 mt-5">Arifin Laembo, S.E.</p>
+            <div class="container-fluid d-flex flex-row-reverse">
+                <img src="<?=base_url('assets/img/tanda_tangan.jpeg')?>" alt="tanda_tangan" width="120" height="120" class="text-end">
+            </div>
+            <p class="text-end pe-4">Arifin Laembo, S.E.</p>
         </div>
     </div>
 

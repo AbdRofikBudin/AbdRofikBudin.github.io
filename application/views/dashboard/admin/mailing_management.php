@@ -84,7 +84,7 @@
                                             <td><?= date('d M Y', strtotime($item->submission_date)) ?></td>
                                             <td><?= $item->wa ?></td>
                                             <td>
-                                            <?= $item->full_address ?></td>
+                                                <?= $item->full_address ?></td>
                                             </td>
                                             <td><?php
 
@@ -108,23 +108,52 @@
                                                 ?></td>
                                             <td>
                                                 <?php if ($item->status == 1) : ?>
-                                                    <a href="<?=site_url('adminpanel/change_letter_to_process/'.$item->id_submission)?>" class="btn btn-warning"><i class="fas fa-user-check"></i></a>
+                                                    <a href="<?= site_url('adminpanel/change_letter_to_process/' . $item->id_submission) ?>" class="btn btn-warning"><i class="fas fa-user-check"></i></a>
                                                 <?php endif ?>
 
                                                 <?php if ($item->status == 2) : ?>
-                                                    <a href="<?=site_url('adminpanel/change_letter_to_send/'.$item->id_submission)?>" class="btn btn-primary"><i class="far fa-paper-plane"></i></a>
-                                                    <a href="<?=site_url('adminpanel/electronic_letter/'.$item->request_type.'/'.$item->id_submission)?>" class="btn btn-danger my-1"><i class="fas fa-print"></i></a>
+                                                    <a href="<?= site_url('adminpanel/change_letter_to_send/' . $item->id_submission) ?>" class="btn btn-primary"><i class="far fa-paper-plane"></i></a>
+                                                    <a href="<?= site_url('adminpanel/electronic_letter/' . $item->request_type . '/' . $item->id_submission) ?>" class="btn btn-danger my-1"><i class="fas fa-print"></i></a>
                                                 <?php endif ?>
 
                                                 <?php if ($item->status == 3) : ?>
-                                                    <a href="<?=site_url('adminpanel/change_letter_to_done/'.$item->id_submission)?>" class="btn btn-success"><i class="fas fa-check"></i></a>
-                                                    <a href="<?=site_url('adminpanel/electronic_letter/'.$item->request_type.'/'.$item->id_submission)?>" class="btn btn-danger my-1"><i class="fas fa-print"></i></a>
+                                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-attach"><i class="fas fa-check"></i></button>
+                                                    <a href="<?= site_url('adminpanel/electronic_letter/' . $item->request_type . '/' . $item->id_submission) ?>" class="btn btn-danger my-1"><i class="fas fa-print"></i></a>
+
+                                                    <div class="modal fade" id="modal-attach">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Lampiran Surat</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form action="<?= site_url('adminpanel/change_letter_to_done/' . $item->id_submission) ?>" method="post" enctype="multipart/form-data">
+                                                                    <div class="modal-body">
+
+                                                                        <div class="mb-3">
+                                                                            <label for="exampleFormControlTextarea1" class="form-label">Import File Dokumen PDF *</label>
+                                                                            <input class="form-control" type="file" id="formFile" required name="pdf" accept="application/pdf">
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="modal-footer justify-content-between">
+                                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
+                                                    <!-- /.modal -->
                                                 <?php endif ?>
 
                                                 <?php if ($item->status == 4) : ?>
-                                                    <a href="<?=site_url('adminpanel/electronic_letter/'.$item->request_type.'/'.$item->id_submission)?>" class="btn btn-danger my-1"><i class="fas fa-print"></i></a>
+                                                    <a href="<?= site_url('adminpanel/electronic_letter/' . $item->request_type . '/' . $item->id_submission) ?>" class="btn btn-danger my-1"><i class="fas fa-print"></i></a>
                                                 <?php endif ?>
-                                                
+
                                             </td>
                                         </tr>
 

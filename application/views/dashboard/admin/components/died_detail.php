@@ -102,10 +102,40 @@
                           </div>
                           <?php if ($letter->request_status != 3 && $letter->request_status != 4 && !$this->session->userdata('is_logged')) : ?>
                               <div class="container d-flex justify-content-center p-2">
-                                  <a href="<?= site_url('adminpanel/change_to_success/' . $letter->id_letter) ?>" class="btn btn-success mx-2" onclick="return confirm('Apakah Kamu Yakin Mengubah Status Menjadi Selesai ?')"> <i class="fas fa-check-circle"></i>Terima</a>
+                                  <button type="button" class="btn btn-success mx-2" data-toggle="modal" data-target="#modal-terima"> <i class="fas fa-check-circle"></i>Terima</button>
                                   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default"> <i class="fas fa-ban"></i>Tolak</button>
                               </div>
                           <?php endif ?>
+
+                          <div class="modal fade" id="modal-terima">
+                              <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h4 class="modal-title">Keterangan Nomor Surat</h4>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <form action="<?= site_url('adminpanel/change_to_success/' . $letter->id_letter) ?>" method="post">
+                                          <div class="modal-body">
+
+                                              <div class="mb-3">
+                                                  <label for="exampleFormControlTextarea1" class="form-label">Masukan Nomor Surat Kematian</label>
+                                                  <input type="text" class="form-control" id="exampleFormControlTextarea1" required name="no-letter">
+                                              </div>
+
+                                          </div>
+                                          <div class="modal-footer justify-content-between">
+                                              <button type="submit" class="btn btn-primary">Simpan</button>
+                                          </div>
+                                      </form>
+                                  </div>
+                                  <!-- /.modal-content -->
+                              </div>
+                              <!-- /.modal-dialog -->
+                          </div>
+                          <!-- /.modal -->
+
 
                           <div class="modal fade" id="modal-default">
                               <div class="modal-dialog modal-dialog-centered">

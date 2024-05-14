@@ -1,19 +1,21 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Adminpanel extends CI_Controller {
+class Adminpanel extends CI_Controller
+{
 
     function __construct()
     {
         parent::__construct();
-        if(!$this->session->userdata('is_admin')){
+        if (!$this->session->userdata('is_admin')) {
             redirect('login/admin');
         }
-    
+
         $this->load->model('Mcrud');
     }
 
-    private function getStaticticDashboard($type) {
+    private function getStaticticDashboard($type)
+    {
 
         $numberOfLetters = $this->db->get_where('letter_requests', array('request_type' => $type))->num_rows();
         $filed = $this->db->get_where('letter_requests', array('request_type' => $type, 'request_status' => 1))->num_rows();
@@ -32,7 +34,8 @@ class Adminpanel extends CI_Controller {
         return $dataArray;
     }
 
-    public function index(){
+    public function index()
+    {
         $data['title'] = "Admin | Dashboard";
         $data['birth'] = $this->getStaticticDashboard("kelahiran");
         $data['died'] = $this->getStaticticDashboard("kematian");
@@ -45,21 +48,31 @@ class Adminpanel extends CI_Controller {
         $this->template->load('template/admin/template_admin', 'dashboard/admin/index', $data);
     }
 
-    public function application_management(){
+    public function application_management()
+    {
         $data['title'] = "Admin | Managemen Pengajuan";
         $sql = "SELECT a.id as id_applicant, lr.id as id_letter, a.*, lr.* FROM letter_requests as lr INNER JOIN applicants as a ON lr.applicant_id = a.id ORDER BY lr.request_date DESC";
         $data['letters'] = $this->db->query($sql)->result();
         $this->template->load('template/admin/template_admin', 'dashboard/admin/applicant_management', $data);
     }
 
-    public function mailing_management() {
+    public function mailing_management()
+    {
         $data['title'] = "Admin | Managemen Pengajuan Surat";
         $sql = "SELECT sl.id as id_submission, a.id as id_applicant, lr.id as id_letter, sl.*, a.*, lr.* FROM submission_letter sl INNER JOIN applicants a ON sl.applicant_id = a.id INNER JOIN letter_requests lr ON sl.letter_id = lr.id ORDER BY sl.submission_date DESC";
         $data['letters'] = $this->db->query($sql)->result();
         $this->template->load('template/admin/template_admin', 'dashboard/admin/mailing_management', $data);
     }
 
-    public function electronic_letter($letter_type, $id){
+    public function admin_management()
+    {
+        $data['title'] = "Admin | Manajemen Admin";
+        $data['admin'] = $this->db->get('admin_operators')->result();
+        $this->template->load('template/admin/template_admin', 'dashboard/admin/admin_management', $data);
+    }
+
+    public function electronic_letter($letter_type, $id)
+    {
         $data['title'] = "Electronic Letter";
 
         switch ($letter_type) {
@@ -105,7 +118,8 @@ class Adminpanel extends CI_Controller {
         $this->template->load('dashboard/admin/letters/main_letter', $url, $data);
     }
 
-    public function detail_application_management($letter_type, $id){
+    public function detail_application_management($letter_type, $id)
+    {
         $data['title'] = "Admin | Detail Managemen Pengajuan";
 
         switch ($letter_type) {
@@ -145,98 +159,192 @@ class Adminpanel extends CI_Controller {
                 redirect('adminpanel');
                 break;
         }
-        
+
 
         $data['letter'] = $this->db->query($sql)->row_object();
         $this->template->load('template/admin/template_admin', $url, $data);
     }
 
-    public function change_letter_to_process($id) {
+    public function change_letter_to_process($id)
+    {
         $dataUpdate = [
             'status' => 2
         ];
 
-        $this->Mcrud->update_item($id, $dataUpdate, "submission_letter", "id" );
+        $this->Mcrud->update_item($id, $dataUpdate, "submission_letter", "id");
 
-        if($this->db->affected_rows()){
-           redirect('adminpanel/mailing_management');
-        }else {
+        if ($this->db->affected_rows()) {
+            redirect('adminpanel/mailing_management');
+        } else {
             redirect('adminpanel/mailing_management');
         }
     }
 
 
-    public function change_letter_to_send($id) {
+    public function change_letter_to_send($id)
+    {
         $dataUpdate = [
             'status' => 3
         ];
 
-        $this->Mcrud->update_item($id, $dataUpdate, "submission_letter", "id" );
+        $this->Mcrud->update_item($id, $dataUpdate, "submission_letter", "id");
 
-        if($this->db->affected_rows()){
-           redirect('adminpanel/mailing_management');
-        }else {
+        if ($this->db->affected_rows()) {
+            redirect('adminpanel/mailing_management');
+        } else {
             redirect('adminpanel/mailing_management');
         }
     }
 
-    public function change_letter_to_done($id) {
+    public function change_letter_to_done($id)
+    {
+
+        $config = array(
+            'upload_path' => "./assets/pdf_files/",
+            'allowed_types' => "pdf",
+            'overwrite' => TRUE,
+            'max_size' => "2048000", // 2 MB
+            'encrypt_name' => TRUE
+        );
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('pdf')) {
+            $letterFiles = $this->upload->data('file_name');
+        } else {
+            $this->session->set_flashdata('flash-gagal', $this->upload->display_errors());
+            redirect('adminpanel/mailing_management');
+        }
+
+
         $dataUpdate = [
-            'status' => 4
+            'status' => 4,
+            'file' => $letterFiles
         ];
 
-        $this->Mcrud->update_item($id, $dataUpdate, "submission_letter", "id" );
+        $this->Mcrud->update_item($id, $dataUpdate, "submission_letter", "id");
 
-        if($this->db->affected_rows()){
-           redirect('adminpanel/mailing_management');
-        }else {
+        if ($this->db->affected_rows()) {
+            redirect('adminpanel/mailing_management');
+        } else {
             redirect('adminpanel/mailing_management');
         }
     }
 
-    public function change_to_process($id){
+    public function change_to_process($id)
+    {
         $dataUpdate = [
             'request_status' => 2
         ];
 
-        $this->Mcrud->update_item($id, $dataUpdate, "letter_requests", "id" );
+        $this->Mcrud->update_item($id, $dataUpdate, "letter_requests", "id");
 
-        if($this->db->affected_rows()){
-           redirect('adminpanel/application_management');
-        }else {
+        if ($this->db->affected_rows()) {
+            redirect('adminpanel/application_management');
+        } else {
             redirect('adminpanel/application_management');
         }
     }
 
-    public function change_to_success($id){
+    public function change_to_success($id)
+    {
+        $no = $this->input->post('no-letter', true);
+
         $dataUpdate = [
+            'no_letter' => $no,
             'request_status' => 4
         ];
 
-        $this->Mcrud->update_item($id, $dataUpdate, "letter_requests", "id" );
+        $this->Mcrud->update_item($id, $dataUpdate, "letter_requests", "id");
 
-        if($this->db->affected_rows()){
-           redirect('adminpanel/application_management');
-        }else {
+        if ($this->db->affected_rows()) {
+            redirect('adminpanel/application_management');
+        } else {
             redirect('adminpanel/application_management');
         }
     }
 
-    public function change_to_reject($id){
-        $noted = $this->input->post('noted',true);
+    public function change_to_reject($id)
+    {
+        $noted = $this->input->post('noted', true);
 
         $dataUpdate = [
             'request_status' => 3,
             'noted' => $noted
         ];
 
-        $this->Mcrud->update_item($id, $dataUpdate, "letter_requests", "id" );
+        $this->Mcrud->update_item($id, $dataUpdate, "letter_requests", "id");
 
-        if($this->db->affected_rows()){
-           redirect('adminpanel/application_management');
-        }else {
+        if ($this->db->affected_rows()) {
+            redirect('adminpanel/application_management');
+        } else {
             redirect('adminpanel/application_management');
         }
     }
 
+    public function add_admin()
+    {
+        $name = $this->input->post('nama-admin', true);
+        $email = $this->input->post('email-admin', true);
+        $username = $this->input->post('username-admin', true);
+        $pass = $this->input->post('password-admin', true);
+
+        $dataInsert = array(
+            "admin_name" => $name,
+            "email" => $email,
+            "username" => $username,
+            "password" => password_hash($pass, PASSWORD_DEFAULT)
+        );
+
+        $this->Mcrud->create_item($dataInsert, "admin_operators");
+
+
+        if ($this->db->affected_rows()) {
+            redirect('adminpanel/admin_management');
+        } else {
+            redirect('adminpanel/admin_management');
+        }
+    }
+
+    public function edit_admin($id)
+    {
+        $name = $this->input->post('nama-admin', true);
+        $email = $this->input->post('email-admin', true);
+        $username = $this->input->post('username-admin', true);
+        $pass = $this->input->post('password-admin', true);
+
+        if (empty($pass)) {
+            $dataUpdate = [
+                "admin_name" => $name,
+                "email" => $email,
+                "username" => $username
+            ];
+        } else {
+            $dataUpdate = [
+                "admin_name" => $name,
+                "email" => $email,
+                "username" => $username,
+                "password" => password_hash($pass, PASSWORD_DEFAULT)
+            ];
+        }
+
+        $this->Mcrud->update_item($id, $dataUpdate, "admin_operators", "id" );
+
+        if ($this->db->affected_rows()) {
+            redirect('adminpanel/admin_management');
+        } else {
+            redirect('adminpanel/admin_management');
+        }
+    }
+
+    public function delete_admin($id)
+    {
+        $this->Mcrud->delete_item($id, "admin_operators");
+
+        if ($this->db->affected_rows()) {
+            redirect('adminpanel/admin_management');
+        } else {
+            redirect('adminpanel/admin_management');
+        }
+    }
 }

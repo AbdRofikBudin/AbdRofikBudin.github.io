@@ -114,8 +114,8 @@
 
                                                 ?></td>
                                                 <td>
-                                                <?php if ($item->status == 3 || $item->status == 4) : ?>
-                                                    <a href="<?=site_url('dashboard/electronic_letter/'.$item->request_type.'/'.$item->id_submission)?>" class="btn btn-danger my-1"><i class="fas fa-print"></i></a>
+                                                <?php if ($item->status == 4) : ?>
+                                                    <a href="<?=base_url('assets/pdf_files/'.$item->file)?>" class="btn btn-danger my-1" target="_blank"><i class="fas fa-file-pdf"></i></a>
                                                 <?php endif ?>
                                                 </td>
                                            
