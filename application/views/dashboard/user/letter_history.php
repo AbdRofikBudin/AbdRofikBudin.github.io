@@ -42,7 +42,7 @@
                                       <?php $x = 1 ?>
                                       <?php foreach ($letters as $item) : ?>
                                           <tr>
-                                              <td><?= $item->id ?></td>
+                                              <td><?= $x++ ?></td>
                                               <td><?= ucfirst($item->request_type) ?></td>
                                               <td><?= date('d M Y', strtotime($item->request_date)) ?></td>
                                               <td><?php
@@ -97,6 +97,7 @@
 
                                                   <?php if ($item->request_status == 4) : ?>
                                                       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-request-<?=$item->id?>"> <i class="fas fa-file-pdf"></i></button>
+                                                      <a href="<?=site_url('dashboard/electronic_letter/'.$item->request_type.'/'.$item->id)?>" class="btn btn-success"><i class="fas fa-print"></i></i></a>
 
                                                       <div class="modal fade" id="modal-request-<?=$item->id?>">
                                                           <div class="modal-dialog modal-dialog-centered">
