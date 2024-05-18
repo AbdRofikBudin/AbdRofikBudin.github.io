@@ -71,15 +71,17 @@ class Register extends CI_Controller
         $address = $this->input->post('alamat', true);
 
 
-        $this->form_validation->set_rules('nik', 'nik', 'required|min_length[16]|max_length[16]', [
+        $this->form_validation->set_rules('nik', 'nik', 'required|min_length[16]|max_length[16]|is_unique[applicants.nik]', [
             'required' => "Field NIK Wajib Diisi",
             'min_length' => "NIK Isi minimal 16 karakter",
-            'max_length' => "NIK Isi maximun 16 karakter"
+            'max_length' => "NIK Isi maximun 16 karakter",
+            "is_unique" => "NIK sudah digunakan"
         ]);
 
-        $this->form_validation->set_rules('email', 'email', 'required|valid_email', [
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email|is_unique[applicants.email]', [
             'required' => "Field Email Wajib Diisi",
-            'valid_email' => "Isi dengan email yang valid"
+            'valid_email' => "Isi dengan email yang valid",
+            'is_unique' => "Email sudah digunakan"
         ]);
 
         $this->form_validation->set_rules('username', 'username', 'required|is_unique[applicants.username]', [

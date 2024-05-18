@@ -15,6 +15,15 @@
 
             font-family: "Poppins", sans-serif;
         }
+
+        .input-group-pass {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group-pass button {
+            margin-left: -1px;
+        }
     </style>
 </head>
 
@@ -128,16 +137,39 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label text-start">Password</label>
+                            <label for="inputPassword4" class="col-sm-2 col-form-label text-start">Password</label>
                             <div class="col-sm-10">
-                                <input name="password" class="form-control" id="inputPassword3" type="password">
+                                <div class="container p-0 input-group-pass">
+                                    <input name="password" class="form-control" id="inputPassword4" type="password">
+                                    <button type="button" class="btn btn-outline-secondary" id="togglePassword2">
+                                        Show
+                                    </button>
+                                </div>
+
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label for="inputPassword3" class="col-sm-2 col-form-label text-start">Confirm Password</label>
                             <div class="col-sm-10">
-                                <input name="confirm-password" class="form-control" id="inputPassword3" type="password">
+                                <div class="container p-0 input-group-pass">
+                                    <input name="confirm-password" class="form-control" id="inputPassword3" type="password">
+                                    <button type="button" class="btn btn-outline-secondary" id="togglePassword3">
+                                        Show
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label text-start">Agreement</label>
+                            <div class="col-sm-10 text-start">
+                            <input  type="checkbox" class="form-check-input" id="agreementCheck" name="agreement" required>
+                            <label class="form-check-label" for="agreementCheck">
+                               Dengan ini saya menyatakan bahwa data yang saya masukan benar adanya.
+                            </label>
+
                             </div>
                         </div>
 
@@ -189,6 +221,27 @@
                 icon: "warning"
             });
         }
+
+        const togglePassword = document.getElementById('togglePassword3');
+        const password = document.getElementById('inputPassword3');
+
+        const togglePassword2 = document.getElementById('togglePassword2');
+        const password2 = document.getElementById('inputPassword4');
+
+        function setTogglePassword(thePassword, theToggle) {
+
+            theToggle.addEventListener('click', function() {
+                // Toggle the type attribute
+                const type = thePassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                thePassword.setAttribute('type', type);
+
+                // Toggle the button text
+                this.textContent = type === 'password' ? 'Show' : 'Hide';
+            });
+        }
+
+        setTogglePassword(password, togglePassword);
+        setTogglePassword(password2, togglePassword2);
     </script>
 </body>
 

@@ -31,92 +31,91 @@
     <link rel="stylesheet" href="<?= base_url('assets/admin_template/') ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/admin_template/') ?>plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <style>
-      #Fullscreen {
-          width: 100%;
-          height: 100vh;
-          position: fixed;
-          top: 0;
-          left: 0;
-          background: rgba(0, 0, 0, 0.8);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-      }
+        #Fullscreen {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-      #Fullscreen img {
-          max-width: 100%;
-          max-height: 100%;
-      }
+        #Fullscreen img {
+            max-width: 100%;
+            max-height: 100%;
+        }
 
-      #FullscreenKK {
-          width: 100%;
-          height: 100vh;
-          position: fixed;
-          top: 0;
-          left: 0;
-          background: rgba(0, 0, 0, 0.8);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-      }
+        #FullscreenKK {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-      #FullscreenKK img {
-          max-width: 100%;
-          max-height: 100%;
-      }
+        #FullscreenKK img {
+            max-width: 100%;
+            max-height: 100%;
+        }
 
-      #FullscreenUsaha {
-          width: 100%;
-          height: 100vh;
-          position: fixed;
-          top: 0;
-          left: 0;
-          background: rgba(0, 0, 0, 0.8);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-      }
+        #FullscreenUsaha {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-      #FullscreenUsaha img {
-          max-width: 100%;
-          max-height: 100%;
-      }
+        #FullscreenUsaha img {
+            max-width: 100%;
+            max-height: 100%;
+        }
 
-      #FullscreenMove {
-          width: 100%;
-          height: 100vh;
-          position: fixed;
-          top: 0;
-          left: 0;
-          background: rgba(0, 0, 0, 0.8);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-      }
+        #FullscreenMove {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-      #FullscreenMove img {
-          max-width: 100%;
-          max-height: 100%;
-      }
+        #FullscreenMove img {
+            max-width: 100%;
+            max-height: 100%;
+        }
 
-      #FullscreenBirth {
-          width: 100%;
-          height: 100vh;
-          position: fixed;
-          top: 0;
-          left: 0;
-          background: rgba(0, 0, 0, 0.8);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-      }
+        #FullscreenBirth {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-      #FullscreenBirth img {
-          max-width: 100%;
-          max-height: 100%;
-      }
-
-  </style>
+        #FullscreenBirth img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -224,8 +223,8 @@
 
                         <li class="nav-item">
                             <a href="<?= site_url('adminpanel/admin_management') ?>" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
-                               
+                                <i class="nav-icon fas fa-user"></i>
+
                                 <p>
                                     Manajemen Admin
                                 </p>
@@ -319,6 +318,26 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+        var successAlert = $('.flash-success').data('flash');
+
+        if (successAlert) {
+            Swal.fire({
+                title: "Yeayy!",
+                text: successAlert,
+                icon: "success"
+            });
+        }
+
+        var failAlert = $('.flash-fail').data('flash');
+
+        if (failAlert) {
+            Swal.fire({
+                title: "Maaf!",
+                text: failAlert,
+                icon: "warning"
+            });
+        }
+
         $(function() {
             $('#example2').DataTable({
                 "paging": true,

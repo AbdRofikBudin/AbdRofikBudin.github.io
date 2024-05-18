@@ -66,8 +66,9 @@ class Adminpanel extends CI_Controller
 
     public function admin_management()
     {
+        $id = $this->session->userdata('id');
         $data['title'] = "Admin | Manajemen Admin";
-        $data['admin'] = $this->db->get('admin_operators')->result();
+        $data['admin'] = $this->db->query("SELECT * FROM admin_operators WHERE id != $id AND id != 1")->result();
         $this->template->load('template/admin/template_admin', 'dashboard/admin/admin_management', $data);
     }
 
@@ -250,18 +251,32 @@ class Adminpanel extends CI_Controller
     {
         $no = $this->input->post('no-letter', true);
 
-        $dataUpdate = [
-            'no_letter' => $no,
-            'request_status' => 4
-        ];
+        $this->form_validation->set_rules('no-letter', 'no-letter', 'required|is_unique[letter_requests.no_letter]', [
+            'required' => "Field Nomor Surat Wajib Diisi",
+            "is_unique" => "Nomor Surat sudah digunakan"
+        ]);
 
-        $this->Mcrud->update_item($id, $dataUpdate, "letter_requests", "id");
-
-        if ($this->db->affected_rows()) {
-            redirect('adminpanel/application_management');
-        } else {
-            redirect('adminpanel/application_management');
+        if($this->form_validation->run() == false) {
+           $this->session->set_flashdata('flash-gagal', 'No Surat Sudah Digunakan');
+           redirect('adminpanel/application_management');
+        }else {
+            $dataUpdate = [
+                'no_letter' => $no,
+                'request_status' => 4
+            ];
+    
+            $this->Mcrud->update_item($id, $dataUpdate, "letter_requests", "id");
+    
+            if ($this->db->affected_rows()) {
+                $this->session->set_flashdata('flash', 'Berhasil mengubah status surat ke selesai');
+                redirect('adminpanel/application_management');
+            } else {
+                $this->session->set_flashdata('flash-gagal', 'Gagal mengubah status surat ke selesai');
+                redirect('adminpanel/application_management');
+            }
         }
+
+       
     }
 
     public function change_to_reject($id)

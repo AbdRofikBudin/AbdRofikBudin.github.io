@@ -15,6 +15,15 @@
 
             font-family: "Poppins", sans-serif;
         }
+
+        .input-group-pass {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group-pass button {
+            margin-left: -1px;
+        }
     </style>
 </head>
 
@@ -35,7 +44,7 @@
                 <div class="col text-center p-4 rounded shadow">
                     <div class="container text-center mb-4">
                         <h1 class="display-6 fw-medium">Login User</h1>
-                    
+
                         <?php if ($this->session->userdata('flash')) : ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>Yeayy!</strong> <?= $this->session->userdata('flash') ?>.
@@ -72,7 +81,12 @@
                         <div class="row mb-3">
                             <label for="inputPassword3" class="col-sm-2 col-form-label text-start">Password</label>
                             <div class="col-sm-10">
-                                <input name="password" class="form-control" id="inputPassword3" type="password">
+                                <div class="container p-0 input-group-pass">
+                                    <input name="password" class="form-control" id="inputPassword3" type="password">
+                                    <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                                        Show
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -87,10 +101,10 @@
                             </div>
                         </div>
                         <div class="container d-flex justify-content-center gap-2">
-                        <button type="submit" class="btn btn-primary text-center mt-3">Login</button>
-                        <a href="<?=site_url('Register')?>" class="btn btn-primary text-center mt-3">Daftar</a>
+                            <button type="submit" class="btn btn-primary text-center mt-3">Login</button>
+                            <a href="<?= site_url('Register') ?>" class="btn btn-primary text-center mt-3">Daftar</a>
                         </div>
-                       
+
                     </form>
                 </div>
                 <div class="col text-center my-auto">
@@ -131,6 +145,18 @@
                 icon: "warning"
             });
         }
+
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('inputPassword3');
+
+        togglePassword.addEventListener('click', function() {
+            // Toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+
+            // Toggle the button text
+            this.textContent = type === 'password' ? 'Show' : 'Hide';
+        });
     </script>
 </body>
 

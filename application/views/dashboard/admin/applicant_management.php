@@ -16,7 +16,14 @@
             </div>
         </div><!-- /.container-fluid -->
     </section>
-
+    <?php if ($this->session->flashdata('flash')) : ?>
+        <div class="flash-success" data-flash="<?= $this->session->flashdata('flash'); ?>"></div>
+        <?php unset($_SESSION['flash']); ?>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('flash-gagal')) : ?>
+        <div class="flash-fail" data-flash="<?= $this->session->flashdata('flash-gagal'); ?>"></div>
+        <?php unset($_SESSION['flash-gagal']); ?>
+    <?php endif; ?>
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
